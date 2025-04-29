@@ -58,26 +58,114 @@
                     <option value="102">102 - Tributada sem permissão de crédito</option>
                     <option value="101">101 - Tributada com permissão de crédito</option>
                     <option value="103">103 - Isenção do ICMS para faixa de receita bruta</option>
-                    <!-- Outros valores -->
+                    <option value="201">201 - Tributada com permissão de crédito e com cobrança do ICMS por ST</option>
+                    <option value="202">202 - Tributada sem permissão de crédito e com cobrança do ICMS por ST</option>
+                    <option value="203">203 - Isenção do ICMS para faixa de receita bruta e com cobrança do ICMS por ST</option>
+                    <option value="300">300 - Imune</option>
+                    <option value="400">400 - Não tributada</option>
+                    <option value="500">500 - ICMS cobrado anteriormente por ST ou por antecipação</option>
+                    <option value="900">900 - Outros</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="cfop">CFOP:</label>
                 <input type="text" id="cfop" name="cfop" class="form-control">
             </div>
+
             <div class="form-group">
                 <label for="cst_ipi">Situação Tributária (CST) - IPI:</label>
                 <select id="cst_ipi" name="cst_ipi" class="form-control">
                     <option value="50">50 - Saída tributada</option>
                     <option value="51">51 - Saída tributada com alíquota zero</option>
-                    <!-- Outros valores -->
+                    <option value="52">52 - Saída isenta</option>
+                    <option value="53">53 - Saída não-tributada</option>
+                    <option value="54">54 - Saída imune</option>
+                    <option value="55">55 - Saída com suspensão</option>
+                    <option value="99">99 - Outras saídas</option>
+                    <option value="NDI">Não destacar IPI</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="aliquota_ipi">Alíquota (%) - IPI:</label>
                 <input type="number" id="aliquota_ipi" name="aliquota_ipi" class="form-control" step="0.01">
             </div>
-            <!-- Outros campos do formulário -->
+
+            <div class="form-group">
+                <label for="cst_issqn">Situação Tributária (CST) - ISSQN:</label>
+                <select id="cst_issqn" name="cst_issqn" class="form-control">
+                    <option value="tributado">Tributado</option>
+                    <option value="isento">Isento</option>
+                    <option value="outra">Outra situação</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="aliquota_issqn">Alíquota (%) - ISSQN:</label>
+                <input type="number" id="aliquota_issqn" name="aliquota_issqn" class="form-control" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="base_issqn">Base (%) - ISSQN:</label>
+                <input type="number" id="base_issqn" name="base_issqn" class="form-control" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="descontar_iss">Descontar ISS:</label>
+                <select id="descontar_iss" name="descontar_iss" class="form-control">
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="cst_pis">Situação Tributária (CST) - PIS:</label>
+                <select id="cst_pis" name="cst_pis" class="form-control">
+                    <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
+                    <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
+                    <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
+                    <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
+                    <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
+                    <option value="06">06 - Operação tributável (alíquota zero)</option>
+                    <option value="07">07 - Operação isenta da contribuição</option>
+                    <option value="08">08 - Operação sem incidência da contribuição</option>
+                    <option value="09">09 - Operação com suspensão da contribuição</option>
+                    <option value="49">49 - Outras Operações de Saída</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="base_pis">Base (%) - PIS:</label>
+                <input type="number" id="base_pis" name="base_pis" class="form-control" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="cst_cofins">Situação Tributária (CST) - COFINS:</label>
+                <select id="cst_cofins" name="cst_cofins" class="form-control">
+                    <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
+                    <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
+                    <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
+                    <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
+                    <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
+                    <option value="06">06 - Operação tributável (alíquota zero)</option>
+                    <option value="07">07 - Operação isenta da contribuição</option>
+                    <option value="08">08 - Operação sem incidência da contribuição</option>
+                    <option value="09">09 - Operação com suspensão da contribuição</option>
+                    <option value="49">49 - Outras Operações de Saída</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="base_cofins">Base (%) - COFINS:</label>
+                <input type="number" id="base_cofins" name="base_cofins" class="form-control" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="aliquota">Alíquota (%):</label>
+                <input type="number" id="aliquota" name="aliquota" class="form-control" step="0.01">
+            </div>
+
             <div class="form-group text-center">
                 <button type="button" id="generatePDF" class="btn btn-primary">Gerar PDF</button>
             </div>
@@ -96,6 +184,15 @@
             const cfop = document.getElementById('cfop').value;
             const cst_ipi = document.getElementById('cst_ipi').value;
             const aliquota_ipi = document.getElementById('aliquota_ipi').value;
+            const cst_issqn = document.getElementById('cst_issqn').value;
+            const aliquota_issqn = document.getElementById('aliquota_issqn').value;
+            const base_issqn = document.getElementById('base_issqn').value;
+            const descontar_iss = document.getElementById('descontar_iss').value;
+            const cst_pis = document.getElementById('cst_pis').value;
+            const base_pis = document.getElementById('base_pis').value;
+            const cst_cofins = document.getElementById('cst_cofins').value;
+            const base_cofins = document.getElementById('base_cofins').value;
+            const aliquota = document.getElementById('aliquota').value;
 
             // Adiciona o título ao PDF
             doc.setFontSize(16);
@@ -107,6 +204,15 @@
             doc.text(`CFOP: ${cfop}`, 20, 40);
             doc.text(`Situação Tributária (CST) - IPI: ${cst_ipi}`, 20, 50);
             doc.text(`Alíquota IPI: ${aliquota_ipi}`, 20, 60);
+            doc.text(`Situação Tributária (CST) - ISSQN: ${cst_issqn}`, 20, 70);
+            doc.text(`Alíquota ISSQN: ${aliquota_issqn}`, 20, 80);
+            doc.text(`Base (%) - ISSQN: ${base_issqn}`, 20, 90);
+            doc.text(`Descontar ISS: ${descontar_iss}`, 20, 100);
+            doc.text(`Situação Tributária (CST) - PIS: ${cst_pis}`, 20, 110);
+            doc.text(`Base (%) - PIS: ${base_pis}`, 20, 120);
+            doc.text(`Situação Tributária (CST) - COFINS: ${cst_cofins}`, 20, 130);
+            doc.text(`Base (%) - COFINS: ${base_cofins}`, 20, 140);
+            doc.text(`Alíquota (%): ${aliquota}`, 20, 150);
 
             // Gera o PDF
             doc.save('Formulario_Fiscal.pdf');
