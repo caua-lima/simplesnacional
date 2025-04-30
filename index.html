@@ -590,122 +590,184 @@
 
   <script>
     document.getElementById('has_exceptions_ncm').addEventListener('change', function(){
-      document.getElementById('ncm_exceptions_group').style.display =
-        this.value === 'Sim' ? 'block' : 'none';
-      document.getElementById('exceptions_block').style.display =
-        this.value === 'Sim' ? 'block' : 'none';
-      if (this.value !== 'Sim') document.getElementById('ncm_tags').innerHTML = '';
+  document.getElementById('ncm_exceptions_group').style.display =
+    this.value === 'Sim' ? 'block' : 'none';
+  document.getElementById('exceptions_block').style.display =
+    this.value === 'Sim' ? 'block' : 'none';
+  if (this.value !== 'Sim') document.getElementById('ncm_tags').innerHTML = '';
+});
+
+document.getElementById('ncm_exceptions').addEventListener('keypress', function(e){
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const val = this.value.trim();
+    if (/^\d{8}$/.test(val)) {
+      const span = document.createElement('span');
+      span.className = 'tag';
+      span.textContent = val;
+      document.getElementById('ncm_tags').appendChild(span);
+      this.value = '';
+    } else {
+      alert('NCM deve ter exatamente 8 dígitos');
+    }
+  }
+});
+
+document.getElementById('has_natureza_fora').addEventListener('change', function(){
+  document.getElementById('natureza_fora').style.display = this.value === 'Sim' ? 'block' : 'none';
+});
+
+document.getElementById('formFiscal').addEventListener('submit', function(e){
+  e.preventDefault();
+  const { jsPDF } = window.jspdf;
+  const logoImg = document.getElementById('logopdf');  // Pegando a imagem da logo
+  const logoSrc = logoImg.src; // Caminho da imagem, que será convertido para base64
+
+  function gen(doc, lines, title){
+    let y = 20;
+    const pageWidth = doc.internal.pageSize.getWidth();
+
+    // Logo no topo
+    if (logoSrc) {
+      doc.addImage(logoSrc, 'PNG', (pageWidth - 80) / 2, 10, 50, 20); // Adicionando a imagem da logo
+      y = 35;  // Atualizando a posição Y para o conteúdo após a logo
+    }
+
+    // Título centralizado
+    doc.setFontSize(14);
+    doc.setTextColor(40);
+    doc.text(title, pageWidth / 2, y, { align: 'center' });
+    y += 10;
+
+    // Formatação em tabela
+    const rows = lines.map(l => [l.split(':')[0], l.split(':').slice(1).join(':').trim()]);
+    doc.autoTable({
+      startY: y + 5,
+      head: [['Campo', 'Valor']],
+      body: rows,
+      theme: 'grid',
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [0, 0, 0], textColor: 255 },
+      alternateRowStyles: { fillColor: [240, 240, 240] }
     });
-  
-    document.getElementById('ncm_exceptions').addEventListener('keypress', function(e){
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const val = this.value.trim();
-        if (/^\d{8}$/.test(val)) {
-          const span = document.createElement('span');
-          span.className = 'tag';
-          span.textContent = val;
-          document.getElementById('ncm_tags').appendChild(span);
-          this.value = '';
-        } else {
-          alert('NCM deve ter exatamente 8 dígitos');
-        }
-      }
+  }
+
+  // Variáveis para as respostas de "Sim" ou "Não"
+  const hasExceptionsNCM = document.getElementById('has_exceptions_ncm').value;
+  const hasNaturezaFora = document.getElementById('has_natureza_fora').value;
+
+  // Intra-Estado - Sempre gerado
+  const intra = [
+    'Natureza de Operação dentro do Estado',
+    `CSOSN: ${csosn.value}`, `CFOP: ${cfop.value}`, `ICMS DIFAL: ${icms_difal.value}`,
+    `CST IPI: ${cst_ipi.value}`, `Alíquota IPI: ${aliquota_ipi.value}%`,
+    `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Alíquota ISSQN: ${aliquota_issqn.value}%`,
+    `Base ISSQN: ${base_issqn.value}%`, `Descontar ISS: ${descontar_iss.value}`,
+    `CST PIS: ${cst_pis.value}`, `Base PIS: ${base_pis.value}%`,
+    `CST COFINS: ${cst_cofins.value}`, `Base COFINS: ${base_cofins.value}%`,
+    `Alíquota COFINS: ${aliquota.value}%`
+  ];
+  const doc1 = new jsPDF(); 
+  gen(doc1, intra, 'Configuração Fiscal - Dentro do Estado');
+  doc1.save('Config. Natureza de Operação - Dentro do Estado.pdf');
+
+  // Condicional para verificar se "Exceções de NCM" é "Sim" e se NCM foi inserido
+  if (hasExceptionsNCM === 'Sim') {
+    const ncmTags = document.querySelectorAll('#ncm_tags .tag');
+    if (ncmTags.length === 0) {
+      alert('Por favor, adicione pelo menos um NCM para continuar!');
+      return; // Impede a geração do PDF de exceções caso não haja NCMs
+    }
+    
+    const exc = [
+      'Natureza para NCM’s Exceções',
+      `CSOSN: ${csosn_exc.value}`,
+      `CFOP: ${cfop_exc.value}`,
+      `ICMS DIFAL: ${icms_difal_exc.value}`,
+      `CST IPI: ${cst_ipi_exc.value}`,
+      `Alíquota IPI: ${aliquota_ipi_exc.value}%`,
+      `CST ISSQN: ${cst_issqn_exc.value}`,
+      `Alíquota ISSQN: ${aliquota_issqn_exc.value}%`,
+      `Base ISSQN: ${base_issqn_exc.value}%`,
+      `Descontar ISS: ${descontar_iss_exc.value}`,
+      `CST PIS: ${cst_pis_exc.value}`,
+      `Base PIS: ${base_pis_exc.value}%`,
+      `CST COFINS: ${cst_cofins_exc.value}`,
+      `Base COFINS: ${base_cofins_exc.value}%`,
+      `Alíquota: ${aliquota_exc.value}%`
+    ];
+
+    document.querySelectorAll('#ncm_tags .tag').forEach(t => {
+      exc.push(`NCM: ${t.textContent}`);
     });
-  
-    document.getElementById('has_natureza_fora').addEventListener('change', function(){
-      document.getElementById('natureza_fora').style.display = this.value === 'Sim' ? 'block' : 'none';
+
+    const doc3 = new jsPDF();
+    gen(doc3, exc, 'Configuração Fiscal - Exceções de NCM');
+    doc3.save('Config. Natureza de Operação - Exceções de NCM´s.pdf');
+  }
+
+  if (hasNaturezaFora === 'Sim' && hasExceptionsNCM === 'Não') {
+    // Se "Fora do Estado" for "Sim" e "Exceções de NCM" for "Não", gera os PDFs de "Dentro do Estado" e "Fora do Estado"
+    const fora = [
+      'Natureza Fora-Estado',
+      `CSOSN: ${csosn_fora.value}`, `CFOP: ${cfop_fora.value}`, `ICMS DIFAL: ${icms_difal_fora.value}`,
+      `CST IPI: ${cst_ipi_fora.value}`, `Alíquota IPI: ${aliquota_ipi_fora.value}%`,
+      `CST ISSQN: ${cst_issqn_fora.options[cst_issqn_fora.selectedIndex].text}`,
+      `Alíquota ISSQN: ${aliquota_issqn_fora.value}%`, `Base ISSQN: ${base_issqn_fora.value}%`,
+      `Descontar ISS: ${descontar_iss_fora.value}`, `CST PIS: ${cst_pis_fora.value}`, `Base PIS: ${base_pis_fora.value}%`,
+      `CST COFINS: ${cst_cofins_fora.value}`, `Base COFINS: ${base_cofins_fora.value}%`,
+      `Alíquota COFINS: ${aliquota_fora.value}%`
+    ];
+    const doc2 = new jsPDF(); 
+    gen(doc2, fora, 'Configuração Fiscal - Fora do Estado');
+    doc2.save('Config. Natureza de Operação - Fora do Estado.pdf');
+  }
+
+  if (hasExceptionsNCM === 'Sim' && hasNaturezaFora === 'Sim') {
+    // Se ambos forem "Sim", gera todos os PDFs
+    const exc = [
+      'Natureza para NCM’s Exceções',
+      `CSOSN: ${csosn_exc.value}`,
+      `CFOP: ${cfop_exc.value}`,
+      `ICMS DIFAL: ${icms_difal_exc.value}`,
+      `CST IPI: ${cst_ipi_exc.value}`,
+      `Alíquota IPI: ${aliquota_ipi_exc.value}%`,
+      `CST ISSQN: ${cst_issqn_exc.value}`,
+      `Alíquota ISSQN: ${aliquota_issqn_exc.value}%`,
+      `Base ISSQN: ${base_issqn_exc.value}%`,
+      `Descontar ISS: ${descontar_iss_exc.value}`,
+      `CST PIS: ${cst_pis_exc.value}`,
+      `Base PIS: ${base_pis_exc.value}%`,
+      `CST COFINS: ${cst_cofins_exc.value}`,
+      `Base COFINS: ${base_cofins_exc.value}%`,
+      `Alíquota: ${aliquota_exc.value}%`
+    ];
+
+    document.querySelectorAll('#ncm_tags .tag').forEach(t => {
+      exc.push(`NCM: ${t.textContent}`);
     });
-  
-    document.getElementById('formFiscal').addEventListener('submit', function(e){
-      e.preventDefault();
-      const { jsPDF } = window.jspdf;
-      const logoImg = document.getElementById('logoBase64');
-  
-      function gen(doc, lines, title){
-        let y = 20;
-        const pageWidth = doc.internal.pageSize.getWidth();
-  
-        // Logo no topo
-        if (logoImg && logoImg.src) {
-          doc.addImage(logoImg.src, 'PNG', (pageWidth - 50) / 2, 10, 50, 20);
-          y = 35;
-        }
-  
-        // Título centralizado
-        doc.setFontSize(14);
-        doc.setTextColor(40);
-        doc.text(title, pageWidth / 2, y, { align: 'center' });
-        y += 10;
-  
-        // Formatação em tabela
-        const rows = lines.map(l => [l.split(':')[0], l.split(':').slice(1).join(':').trim()]);
-        doc.autoTable({
-          startY: y + 5,
-          head: [['Campo', 'Valor']],
-          body: rows,
-          theme: 'grid',
-          styles: { fontSize: 10 },
-          headStyles: { fillColor: [0, 0, 0], textColor: 255 },
-          alternateRowStyles: { fillColor: [240, 240, 240] }
-        });
-      }
-  
-      // Intra-Estado
-      const intra = [
-        'Natureza de Operação dentro do Estado',
-        `CSOSN: ${csosn.value}`, `CFOP: ${cfop.value}`, `ICMS DIFAL: ${icms_difal.value}`,
-        `CST IPI: ${cst_ipi.value}`, `Alíquota IPI: ${aliquota_ipi.value}%`,
-        `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Alíquota ISSQN: ${aliquota_issqn.value}%`,
-        `Base ISSQN: ${base_issqn.value}%`, `Descontar ISS: ${descontar_iss.value}`,
-        `CST PIS: ${cst_pis.value}`, `Base PIS: ${base_pis.value}%`,
-        `CST COFINS: ${cst_cofins.value}`, `Base COFINS: ${base_cofins.value}%`,
-        `Alíquota COFINS: ${aliquota.value}%`
-      ];
-      const doc1 = new jsPDF(); gen(doc1, intra, 'Configuração Fiscal - Dentro do Estado'); doc1.save('Config. Natureza de Operação - Dentro do Estado.pdf');
-  
-      if (has_natureza_fora.value === 'Sim') {
-        const fora = [
-          'Natureza Fora-Estado',
-          `CSOSN: ${csosn_fora.value}`, `CFOP: ${cfop_fora.value}`, `ICMS DIFAL: ${icms_difal_fora.value}`,
-          `CST IPI: ${cst_ipi_fora.value}`, `Alíquota IPI: ${aliquota_ipi_fora.value}%`,
-          `CST ISSQN: ${cst_issqn_fora.options[cst_issqn_fora.selectedIndex].text}`,
-          `Alíquota ISSQN: ${aliquota_issqn_fora.value}%`, `Base ISSQN: ${base_issqn_fora.value}%`,
-          `Descontar ISS: ${descontar_iss_fora.value}`, `CST PIS: ${cst_pis_fora.value}`, `Base PIS: ${base_pis_fora.value}%`,
-          `CST COFINS: ${cst_cofins_fora.value}`, `Base COFINS: ${base_cofins_fora.value}%`,
-          `Alíquota COFINS: ${aliquota_fora.value}%`
-        ];
-        const doc2 = new jsPDF(); gen(doc2, fora, 'Configuração Fiscal - Fora do Estado'); doc2.save('Config. Natureza de Operação - Fora do Estado.pdf');
-      }
-  
-      if (has_exceptions_ncm.value === 'Sim') {
-        const exc = [
-          'Natureza para NCM’s Exceções',
-          `CSOSN: ${csosn_exc.value}`,
-          `CFOP: ${cfop_exc.value}`,
-          `ICMS DIFAL: ${icms_difal_exc.value}`,
-          `CST IPI: ${cst_ipi_exc.value}`,
-          `Alíquota IPI: ${aliquota_ipi_exc.value}%`,
-          `CST ISSQN: ${cst_issqn_exc.value}`,
-          `Alíquota ISSQN: ${aliquota_issqn_exc.value}%`,
-          `Base ISSQN: ${base_issqn_exc.value}%`,
-          `Descontar ISS: ${descontar_iss_exc.value}`,
-          `CST PIS: ${cst_pis_exc.value}`,
-          `Base PIS: ${base_pis_exc.value}%`,
-          `CST COFINS: ${cst_cofins_exc.value}`,
-          `Base COFINS: ${base_cofins_exc.value}%`,
-          `Alíquota: ${aliquota_exc.value}%`
-        ];
-  
-        document.querySelectorAll('#ncm_tags .tag').forEach(t => {
-          exc.push(`NCM: ${t.textContent}`);
-        });
-  
-        const doc3 = new jsPDF();
-        gen(doc3, exc, 'Configuração Fiscal - Exceções de NCM');
-        doc3.save('Config. Natureza de Operação - Exceções de NCM´s.pdf');
-      }
-    });
+
+    const doc3 = new jsPDF();
+    gen(doc3, exc, 'Configuração Fiscal - Exceções de NCM');
+    doc3.save('Config. Natureza de Operação - Exceções de NCM´s.pdf');
+
+    const fora = [
+      'Natureza Fora-Estado',
+      `CSOSN: ${csosn_fora.value}`, `CFOP: ${cfop_fora.value}`, `ICMS DIFAL: ${icms_difal_fora.value}`,
+      `CST IPI: ${cst_ipi_fora.value}`, `Alíquota IPI: ${aliquota_ipi_fora.value}%`,
+      `CST ISSQN: ${cst_issqn_fora.options[cst_issqn_fora.selectedIndex].text}`,
+      `Alíquota ISSQN: ${aliquota_issqn_fora.value}%`, `Base ISSQN: ${base_issqn_fora.value}%`,
+      `Descontar ISS: ${descontar_iss_fora.value}`, `CST PIS: ${cst_pis_fora.value}`, `Base PIS: ${base_pis_fora.value}%`,
+      `CST COFINS: ${cst_cofins_fora.value}`, `Base COFINS: ${base_cofins_fora.value}%`,
+      `Alíquota COFINS: ${aliquota_fora.value}%`
+    ];
+    const doc2 = new jsPDF(); 
+    gen(doc2, fora, 'Configuração Fiscal - Fora do Estado');
+    doc2.save('Config. Natureza de Operação - Fora do Estado.pdf');
+  }
+});
+
+
   </script>
   
 
