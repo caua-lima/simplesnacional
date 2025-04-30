@@ -625,30 +625,30 @@
       }
       // Intra-Estado
       const intra=[
-        'Natureza Intra-Estado',
+        'Natureza de Operação dentro do Estado',
         `CSOSN: ${csosn.value}`, `CFOP: ${cfop.value}`, `ICMS DIFAL: ${icms_difal.value}`,
-        `CST IPI: ${cst_ipi.value}`, `Aliq IPI: ${aliquota_ipi.value}%`,
-        `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Aliq ISSQN: ${aliquota_issqn.value}%`,
+        `CST IPI: ${cst_ipi.value}`, `Alíquota IPI: ${aliquota_ipi.value}%`,
+        `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Alíquota ISSQN: ${aliquota_issqn.value}%`,
         `Base ISSQN: ${base_issqn.value}%`, `Descontar ISS: ${descontar_iss.value}`,
         `CST PIS: ${cst_pis.value}`, `Base PIS: ${base_pis.value}%`,
         `CST COFINS: ${cst_cofins.value}`, `Base COFINS: ${base_cofins.value}%`,
-        `Alíquota: ${aliquota.value}%`
+        `Alíquota COFINS: ${aliquota.value}%`
       ];
-      const doc1=new jsPDF(); gen(doc1,intra); doc1.save('Natureza_IntraEstado.pdf');
+      const doc1=new jsPDF(); gen(doc1,intra); doc1.save('Config. Natureza de Operação - Dentro do Estado.pdf');
 
       // Fora-Estado
       if(has_natureza_fora.value==='Sim'){
         const fora=[
           'Natureza Fora-Estado',
           `CSOSN: ${csosn_fora.value}`, `CFOP: ${cfop_fora.value}`, `ICMS DIFAL: ${icms_difal_fora.value}`,
-          `CST IPI: ${cst_ipi_fora.value}`, `Aliq IPI: ${aliquota_ipi_fora.value}%`,
+          `CST IPI: ${cst_ipi_fora.value}`, `Alíquota IPI: ${aliquota_ipi_fora.value}%`,
           `CST ISSQN: ${cst_issqn_fora.options[cst_issqn_fora.selectedIndex].text}`,
-          `Aliq ISSQN: ${aliquota_issqn_fora.value}%`, `Base ISSQN: ${base_issqn_fora.value}%`,
+          `Alíquota ISSQN: ${aliquota_issqn_fora.value}%`, `Base ISSQN: ${base_issqn_fora.value}%`,
           `Descontar ISS: ${descontar_iss_fora.value}`, `CST PIS: ${cst_pis_fora.value}`, `Base PIS: ${base_pis_fora.value}%`,
           `CST COFINS: ${cst_cofins_fora.value}`, `Base COFINS: ${base_cofins_fora.value}%`,
-          `Alíquota: ${aliquota_fora.value}%`
+          `Alíquota COFINS: ${aliquota_fora.value}%`
         ];
-        const doc2=new jsPDF(); gen(doc2,fora); doc2.save('Natureza_ForaEstado.pdf');
+        const doc2=new jsPDF(); gen(doc2,fora); doc2.save('Config. Natureza de Operação - Fora do Estado.pdf');
       }
       // Exceções NCM + natureza completa
 if(has_exceptions_ncm.value==='Sim'){
@@ -658,16 +658,16 @@ if(has_exceptions_ncm.value==='Sim'){
     `CFOP: ${cfop_exc.value}`,
     `ICMS DIFAL: ${icms_difal_exc.value}`,
     `CST IPI: ${cst_ipi_exc.value}`,
-    `Aliq IPI: ${aliquota_ipi_exc.value}%`,
+    `Alíquota IPI: ${aliquota_ipi_exc.value}%`,
     `CST ISSQN: ${cst_issqn_exc.value}`,
-    `Aliq ISSQN: ${aliquota_issqn_exc.value}%`,
+    `Alíquota ISSQN: ${aliquota_issqn_exc.value}%`,
     `Base ISSQN: ${base_issqn_exc.value}%`,
     `Descontar ISS: ${descontar_iss_exc.value}`,
     `CST PIS: ${cst_pis_exc.value}`,
     `Base PIS: ${base_pis_exc.value}%`,
     `CST COFINS: ${cst_cofins_exc.value}`,
     `Base COFINS: ${base_cofins_exc.value}%`,
-    `Alíquota: ${aliquota_exc.value}%`
+    `Alíquota COFINS: ${aliquota_exc.value}%`
   ];
   // agora adiciona cada NCM em forma de tag
   document.querySelectorAll('#ncm_tags .tag').forEach(t=>{
@@ -675,7 +675,7 @@ if(has_exceptions_ncm.value==='Sim'){
   });
   const doc3 = new jsPDF();
   gen(doc3, exc);
-  doc3.save('Excecoes_NCM.pdf');
+  doc3.save('Config. Natureza de Operação - Exceções de NCM´s.pdf');
 }
     });
   </script>
