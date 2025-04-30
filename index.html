@@ -17,6 +17,7 @@
     .form-control { margin-top:5px; margin-bottom:15px; }
     .btn-primary { background:#000; border:none; }
     .footer { background:#000; color:#fff; text-align:center; padding:30px 0; margin-top:30px; }
+    .tag { display:inline-block; background:#007bff; color:#fff; padding:2px 6px; margin:2px; border-radius:4px; font-size:0.9em; }
   </style>
 </head>
 <body>
@@ -33,32 +34,6 @@
   <div class="container">
     <h2>Formulário de Regime Tributário Simples Nacional</h2>
     <form id="formFiscal">
-
-      <!-- Exceções de NCM -->
-      <div class="form-group">
-        <label for="has_exceptions_ncm">Existem exceções de NCM´s?</label>
-        <select id="has_exceptions_ncm" class="form-control">
-          <option value="">Selecionar</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-      </div>
-      <div class="form-group" id="ncm_exceptions_group" style="display:none;">
-        <label for="ncm_exceptions">NCM’s exceções (8 dígitos cada, separados por vírgula):</label>
-        <input type="text" id="ncm_exceptions" name="ncm_exceptions" class="form-control"
-               pattern="^\d{8}(,\d{8})*$"
-               placeholder="ex: 12345678,87654321"/>
-      </div>
-
-      <!-- Natureza fora do Estado trigger -->
-      <div class="form-group">
-        <label for="has_natureza_fora">Natureza de Operação diferente para Vendas para fora do Estado?</label>
-        <select id="has_natureza_fora" class="form-control">
-          <option value="">Selecionar</option>
-          <option value="Sim">Sim</option>
-          <option value="Não">Não</option>
-        </select>
-      </div>
 
       <!-- Bloco padrão de Natureza de Operação (intra-estado) -->
       <div id="natureza_padrao">
@@ -94,14 +69,14 @@
           <label for="cst_ipi">CST - IPI:</label>
           <select id="cst_ipi" name="cst_ipi" class="form-control" required>
             <option value="">Selecionar</option>
-            <option value="50">50 - Saída tributada</option>
-            <option value="51">51 - Tribut. alíquota zero</option>
-            <option value="52">52 - Saída isenta</option>
-            <option value="53">53 - Saída não-tributada</option>
-            <option value="54">54 - Saída imune</option>
-            <option value="55">55 - Saída com suspensão</option>
-            <option value="99">99 - Outras saídas</option>
-            <option value="NDI">Não destacar IPI</option>
+                    <option value="50">50 - Saída tributada</option>
+                    <option value="51">51 - Saída tributada com alíquota zero</option>
+                    <option value="52">52 - Saída isenta</option>
+                    <option value="53">53 - Saída não-tributada</option>
+                    <option value="54">54 - Saída imune</option>
+                    <option value="55">55 - Saída com suspensão</option>
+                    <option value="99">99 - Outras saídas</option>
+                    <option value="NDI">Não destacar IPI</option>
           </select>
         </div>
         <div class="form-group">
@@ -137,39 +112,39 @@
           <label for="cst_pis">CST - PIS:</label>
           <select id="cst_pis" name="cst_pis" class="form-control" required>
             <option value="">Selecionar</option>
-            <option value="01">01 - Tributável normal</option>
-            <option value="02">02 - Tributável diferenciada</option>
-            <option value="03">03 - Tributável por unidade</option>
-            <option value="04">04 - Monofásica, alíquota zero</option>
-            <option value="05">05 - Substituição Tributária</option>
-            <option value="06">06 - Tributável alíquota zero</option>
-            <option value="07">07 - Isenta</option>
-            <option value="08">08 - Sem incidência</option>
-            <option value="09">09 - Suspensão</option>
-            <option value="49">49 - Outras saídas</option>
-            <option value="50">50 - Crédito vinculado interno</option>
-            <option value="51">51 - Crédito vinculado não-trib. interno</option>
-            <option value="52">52 - Crédito vinculado exportação</option>
-            <option value="53">53 - Crédito vinculado misto</option>
-            <option value="54">54 - Crédito trib. interno + export.</option>
-            <option value="55">55 - Crédito não-trib. interno + export.</option>
-            <option value="56">56 - Crédito misto + export.</option>
-            <option value="60">60 - Crédito presumido interno</option>
-            <option value="61">61 - Crédito presumido não-trib. interno</option>
-            <option value="62">62 - Crédito presumido interno + export.</option>
-            <option value="63">63 - Crédito presumido não-trib. interno + export.</option>
-            <option value="64">64 - Crédito presumido misto + export.</option>
-            <option value="65">65 - Crédito presumido não-trib. interno + export.</option>
-            <option value="66">66 - Crédito presumido misto interno + export.</option>
-            <option value="67">67 - Crédito presumido outras</option>
-            <option value="70">70 - Aquisição sem crédito</option>
-            <option value="71">71 - Aquisição com isenção</option>
-            <option value="72">72 - Aquisição com suspensão</option>
-            <option value="73">73 - Aquisição alíquota zero</option>
-            <option value="74">74 - Aquisição sem incidência</option>
-            <option value="75">75 - Aquisição por ST</option>
-            <option value="98">98 - Outras entradas</option>
-            <option value="99">99 - Outras operações</option>
+            <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
+                    <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
+                    <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
+                    <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
+                    <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
+                    <option value="06">06 - Operação tributável (alíquota zero)</option>
+                    <option value="07">07 - Operação isenta da contribuição</option>
+                    <option value="08">08 - Operação sem incidência da contribuição</option>
+                    <option value="09">09 - Operação com suspensão da contribuição</option>
+                    <option value="49">49 - Outras Operações de Saída</option>
+                    <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
+                    <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
+                    <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                    <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
+                    <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="67">67 - Crédito Presumido - Outras Operações</option>
+                    <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
+                    <option value="71">71 - Operação de Aquisição com Isenção</option>
+                    <option value="72">72 - Operação de Aquisição com Suspensão</option>
+                    <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
+                    <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
+                    <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
+                    <option value="98">98 - Outras Operações de Entrada</option>
+                    <option value="99">99 - Outras operações</option>
           </select>
         </div>
         <div class="form-group">
@@ -180,39 +155,39 @@
           <label for="cst_cofins">CST - COFINS:</label>
           <select id="cst_cofins" name="cst_cofins" class="form-control" required>
             <option value="">Selecionar</option>
-            <option value="01">01 - Tributável normal</option>
-            <option value="02">02 - Tributável diferenciada</option>
-            <option value="03">03 - Tributável por unidade</option>
-            <option value="04">04 - Monofásica, alíquota zero</option>
-            <option value="05">05 - Substituição Tributária</option>
-            <option value="06">06 - Tributável alíquota zero</option>
-            <option value="07">07 - Isenta</option>
-            <option value="08">08 - Sem incidência</option>
-            <option value="09">09 - Suspensão</option>
-            <option value="49">49 - Outras saídas</option>
-            <option value="50">50 - Crédito vinculado interno</option>
-            <option value="51">51 - Crédito vinculado não-trib. interno</option>
-            <option value="52">52 - Crédito vinculado exportação</option>
-            <option value="53">53 - Crédito vinculado misto</option>
-            <option value="54">54 - Crédito trib. interno + export.</option>
-            <option value="55">55 - Crédito não-trib. interno + export.</option>
-            <option value="56">56 - Crédito misto + export.</option>
-            <option value="60">60 - Crédito presumido interno</option>
-            <option value="61">61 - Crédito presumido não-trib. interno</option>
-            <option value="62">62 - Crédito presumido interno + export.</option>
-            <option value="63">63 - Crédito presumido não-trib. interno + export.</option>
-            <option value="64">64 - Crédito presumido misto + export.</option>
-            <option value="65">65 - Crédito presumido não-trib. interno + export.</option>
-            <option value="66">66 - Crédito presumido misto interno + export.</option>
-            <option value="67">67 - Crédito presumido outras</option>
-            <option value="70">70 - Aquisição sem crédito</option>
-            <option value="71">71 - Aquisição com isenção</option>
-            <option value="72">72 - Aquisição com suspensão</option>
-            <option value="73">73 - Aquisição alíquota zero</option>
-            <option value="74">74 - Aquisição sem incidência</option>
-            <option value="75">75 - Aquisição por ST</option>
-            <option value="98">98 - Outras entradas</option>
-            <option value="99">99 - Outras operações</option>
+            <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
+                    <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
+                    <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
+                    <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
+                    <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
+                    <option value="06">06 - Operação tributável (alíquota zero)</option>
+                    <option value="07">07 - Operação isenta da contribuição</option>
+                    <option value="08">08 - Operação sem incidência da contribuição</option>
+                    <option value="09">09 - Operação com suspensão da contribuição</option>
+                    <option value="49">49 - Outras Operações de Saída</option>
+                    <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
+                    <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
+                    <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                    <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
+                    <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="67">67 - Crédito Presumido - Outras Operações</option>
+                    <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
+                    <option value="71">71 - Operação de Aquisição com Isenção</option>
+                    <option value="72">72 - Operação de Aquisição com Suspensão</option>
+                    <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
+                    <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
+                    <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
+                    <option value="98">98 - Outras Operações de Entrada</option>
+                    <option value="99">99 - Outras operações</option>
           </select>
         </div>
         <div class="form-group">
@@ -223,6 +198,32 @@
           <label for="aliquota">Alíquota (%):</label>
           <input type="number" id="aliquota" name="aliquota" class="form-control" max="100" step="0.01" required/>
         </div>
+      </div>
+
+      <!-- Exceções de NCM -->
+      <div class="form-group">
+        <label for="has_exceptions_ncm">Existem exceções de NCM´s?</label>
+        <select id="has_exceptions_ncm" class="form-control">
+          <option value="">Selecionar</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+      <div class="form-group" id="ncm_exceptions_group" style="display:none;">
+        <label for="ncm_exceptions">NCM’s exceções (8 dígitos cada, pressione Enter para adicionar como tag):</label>
+        <input type="text" id="ncm_exceptions" name="ncm_exceptions" class="form-control"
+               placeholder="ex: 12345678" maxlength="8"/>
+        <div id="ncm_tags"></div>
+      </div>
+
+      <!-- Natureza fora do Estado trigger -->
+      <div class="form-group">
+        <label for="has_natureza_fora">Natureza de Operação diferente para Vendas para fora do Estado?</label>
+        <select id="has_natureza_fora" class="form-control">
+          <option value="">Selecionar</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
       </div>
 
       <!-- Bloco fora do Estado -->
@@ -261,18 +262,18 @@
           <label for="cst_ipi_fora">CST - IPI (fora):</label>
           <select id="cst_ipi_fora" name="cst_ipi_fora" class="form-control">
             <option value="">Selecionar</option>
-            <option value="50">50 - Saída tributada</option>
-            <option value="51">51 - Tribut. alíquota zero</option>
-            <option value="52">52 - Saída isenta</option>
-            <option value="53">53 - Saída não-tributada</option>
-            <option value="54">54 - Saída imune</option>
-            <option value="55">55 - Saída com suspensão</option>
-            <option value="99">99 - Outras saídas</option>
-            <option value="NDI">Não destacar IPI</option>
+                    <option value="50">50 - Saída tributada</option>
+                    <option value="51">51 - Saída tributada com alíquota zero</option>
+                    <option value="52">52 - Saída isenta</option>
+                    <option value="53">53 - Saída não-tributada</option>
+                    <option value="54">54 - Saída imune</option>
+                    <option value="55">55 - Saída com suspensão</option>
+                    <option value="99">99 - Outras saídas</option>
+                    <option value="NDI">Não destacar IPI</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="aliquota_ipi_fora">Alíquota IPI (fora):</label>
+          <label for="aliquota_ipi_fora">Alíquota (%) - IPI (fora):</label>
           <input type="number" id="aliquota_ipi_fora" name="aliquota_ipi_fora" class="form-control" max="100" step="0.01"/>
         </div>
         <div class="form-group">
@@ -285,11 +286,11 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="aliquota_issqn_fora">Alíquota ISSQN (fora):</label>
+          <label for="aliquota_issqn_fora">Alíquota (%) - ISSQN (fora):</label>
           <input type="number" id="aliquota_issqn_fora" name="aliquota_issqn_fora" class="form-control" max="100" step="0.01"/>
         </div>
         <div class="form-group">
-          <label for="base_issqn_fora">Base ISSQN (fora):</label>
+          <label for="base_issqn_fora">Base (%) - ISSQN (fora):</label>
           <input type="number" id="base_issqn_fora" name="base_issqn_fora" class="form-control" max="100" step="0.01"/>
         </div>
         <div class="form-group">
@@ -304,96 +305,96 @@
           <label for="cst_pis_fora">CST - PIS (fora):</label>
           <select id="cst_pis_fora" name="cst_pis_fora" class="form-control">
             <option value="">Selecionar</option>
-            <option value="01">01 - Tributável normal</option>
-            <option value="02">02 - Tributável diferenciada</option>
-            <option value="03">03 - Tributável por unidade</option>
-            <option value="04">04 - Monofásica, alíquota zero</option>
-            <option value="05">05 - Substituição Tributária</option>
-            <option value="06">06 - Tributável alíquota zero</option>
-            <option value="07">07 - Isenta</option>
-            <option value="08">08 - Sem incidência</option>
-            <option value="09">09 - Suspensão</option>
-            <option value="49">49 - Outras saídas</option>
-            <option value="50">50 - Crédito vinculado interno</option>
-            <option value="51">51 - Crédito vinculado não-trib. interno</option>
-            <option value="52">52 - Crédito vinculado exportação</option>
-            <option value="53">53 - Crédito vinculado misto</option>
-            <option value="54">54 - Crédito trib. interno + export.</option>
-            <option value="55">55 - Crédito não-trib. interno + export.</option>
-            <option value="56">56 - Crédito misto + export.</option>
-            <option value="60">60 - Crédito presumido interno</option>
-            <option value="61">61 - Crédito presumido não-trib. interno</option>
-            <option value="62">62 - Crédito presumido interno + export.</option>
-            <option value="63">63 - Crédito presumido não-trib. interno + export.</option>
-            <option value="64">64 - Crédito presumido misto + export.</option>
-            <option value="65">65 - Crédito presumido não-trib. interno + export.</option>
-            <option value="66">66 - Crédito presumido misto interno + export.</option>
-            <option value="67">67 - Crédito presumido outras</option>
-            <option value="70">70 - Aquisição sem crédito</option>
-            <option value="71">71 - Aquisição com isenção</option>
-            <option value="72">72 - Aquisição com suspensão</option>
-            <option value="73">73 - Aquisição alíquota zero</option>
-            <option value="74">74 - Aquisição sem incidência</option>
-            <option value="75">75 - Aquisição por ST</option>
-            <option value="98">98 - Outras entradas</option>
-            <option value="99">99 - Outras operações</option>
+            <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
+                    <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
+                    <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
+                    <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
+                    <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
+                    <option value="06">06 - Operação tributável (alíquota zero)</option>
+                    <option value="07">07 - Operação isenta da contribuição</option>
+                    <option value="08">08 - Operação sem incidência da contribuição</option>
+                    <option value="09">09 - Operação com suspensão da contribuição</option>
+                    <option value="49">49 - Outras Operações de Saída</option>
+                    <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
+                    <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
+                    <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                    <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
+                    <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="67">67 - Crédito Presumido - Outras Operações</option>
+                    <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
+                    <option value="71">71 - Operação de Aquisição com Isenção</option>
+                    <option value="72">72 - Operação de Aquisição com Suspensão</option>
+                    <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
+                    <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
+                    <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
+                    <option value="98">98 - Outras Operações de Entrada</option>
+                    <option value="99">99 - Outras operações</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="base_pis_fora">Base PIS (fora):</label>
+          <label for="base_pis_fora">Base (%) - PIS (fora):</label>
           <input type="number" id="base_pis_fora" name="base_pis_fora" class="form-control" max="100" step="0.01"/>
         </div>
         <div class="form-group">
           <label for="cst_cofins_fora">CST - COFINS (fora):</label>
           <select id="cst_cofins_fora" name="cst_cofins_fora" class="form-control">
             <option value="">Selecionar</option>
-            <option value="01">01 - Tributável normal</option>
-            <option value="02">02 - Tributável diferenciada</option>
-            <option value="03">03 - Tributável por unidade</option>
-            <option value="04">04 - Monofásica, alíquota zero</option>
-            <option value="05">05 - Substituição Tributária</option>
-            <option value="06">06 - Tributável alíquota zero</option>
-            <option value="07">07 - Isenta</option>
-            <option value="08">08 - Sem incidência</option>
-            <option value="09">09 - Suspensão</option>
-            <option value="49">49 - Outras saídas</option>
-            <option value="50">50 - Crédito vinculado interno</option>
-            <option value="51">51 - Crédito vinculado não-trib. interno</option>
-            <option value="52">52 - Crédito vinculado exportação</option>
-            <option value="53">53 - Crédito vinculado misto</option>
-            <option value="54">54 - Crédito trib. interno + export.</option>
-            <option value="55">55 - Crédito não-trib. interno + export.</option>
-            <option value="56">56 - Crédito misto + export.</option>
-            <option value="60">60 - Crédito presumido interno</option>
-            <option value="61">61 - Crédito presumido não-trib. interno</option>
-            <option value="62">62 - Crédito presumido interno + export.</option>
-            <option value="63">63 - Crédito presumido não-trib. interno + export.</option>
-            <option value="64">64 - Crédito presumido misto + export.</option>
-            <option value="65">65 - Crédito presumido não-trib. interno + export.</option>
-            <option value="66">66 - Crédito presumido misto interno + export.</option>
-            <option value="67">67 - Crédito presumido outras</option>
-            <option value="70">70 - Aquisição sem crédito</option>
-            <option value="71">71 - Aquisição com isenção</option>
-            <option value="72">72 - Aquisição com suspensão</option>
-            <option value="73">73 - Aquisição alíquota zero</option>
-            <option value="74">74 - Aquisição sem incidência</option>
-            <option value="75">75 - Aquisição por ST</option>
-            <option value="98">98 - Outras entradas</option>
-            <option value="99">99 - Outras operações</option>
+            <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
+                    <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
+                    <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
+                    <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
+                    <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
+                    <option value="06">06 - Operação tributável (alíquota zero)</option>
+                    <option value="07">07 - Operação isenta da contribuição</option>
+                    <option value="08">08 - Operação sem incidência da contribuição</option>
+                    <option value="09">09 - Operação com suspensão da contribuição</option>
+                    <option value="49">49 - Outras Operações de Saída</option>
+                    <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
+                    <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
+                    <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                    <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                    <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
+                    <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                    <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
+                    <option value="67">67 - Crédito Presumido - Outras Operações</option>
+                    <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
+                    <option value="71">71 - Operação de Aquisição com Isenção</option>
+                    <option value="72">72 - Operação de Aquisição com Suspensão</option>
+                    <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
+                    <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
+                    <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
+                    <option value="98">98 - Outras Operações de Entrada</option>
+                    <option value="99">99 - Outras operações</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="base_cofins_fora">Base COFINS (fora):</label>
+          <label for="base_cofins_fora">Base (%) - COFINS (fora):</label>
           <input type="number" id="base_cofins_fora" name="base_cofins_fora" class="form-control" max="100" step="0.01"/>
         </div>
         <div class="form-group">
-          <label for="aliquota_fora">Alíquota (fora):</label>
+          <label for="aliquota_fora">Alíquota (%) (fora):</label>
           <input type="number" id="aliquota_fora" name="aliquota_fora" class="form-control" max="100" step="0.01"/>
         </div>
       </div>
 
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary">Gerar PDF</button>
+        <button type="submit" class="btn btn-primary">Gerar PDFs</button>
       </div>
     </form>
   </div>
@@ -402,62 +403,67 @@
     // mostrar/exceções NCM
     document.getElementById('has_exceptions_ncm').addEventListener('change', function(){
       document.getElementById('ncm_exceptions_group').style.display = this.value==='Sim'?'block':'none';
+      if(this.value!=='Sim') document.getElementById('ncm_tags').innerHTML='';
     });
-    // mostrar/bloco fora
+    // ao pressionar Enter em NCM, cria tag
+    document.getElementById('ncm_exceptions').addEventListener('keypress', function(e){
+      if(e.key==='Enter'){
+        e.preventDefault();
+        const val=this.value.trim();
+        if(/^\d{8}$/.test(val)){
+          const span=document.createElement('span');
+          span.className='tag';
+          span.textContent=val;
+          document.getElementById('ncm_tags').appendChild(span);
+          this.value='';
+        } else alert('NCM deve ter exatamente 8 dígitos');
+      }
+    });
+    // mostrar/esconder bloco fora
     document.getElementById('has_natureza_fora').addEventListener('change', function(){
       document.getElementById('natureza_fora').style.display = this.value==='Sim'?'block':'none';
     });
-
+    // gerar 3 PDFs
     document.getElementById('formFiscal').addEventListener('submit', function(e){
       e.preventDefault();
       const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      let y=20;
-      function write(line){ doc.text(line,20,y); y+=10; }
-
-      // intra
-      write('### Natureza padrão');
-      write(`CSOSN: ${document.getElementById('csosn').value}`);
-      write(`CFOP: ${document.getElementById('cfop').value}`);
-      write(`ICMS DIFAL: ${document.getElementById('icms_difal').value}`);
-      write(`CST IPI: ${document.getElementById('cst_ipi').value}`);
-      write(`Aliquota IPI: ${document.getElementById('aliquota_ipi').value}%`);
-      write(`CST ISSQN: ${document.getElementById('cst_issqn').options[document.getElementById('cst_issqn').selectedIndex].text}`);
-      write(`Aliquota ISSQN: ${document.getElementById('aliquota_issqn').value}%`);
-      write(`Base ISSQN: ${document.getElementById('base_issqn').value}%`);
-      write(`Descontar ISS: ${document.getElementById('descontar_iss').value}`);
-      write(`CST PIS: ${document.getElementById('cst_pis').value}`);
-      write(`Base PIS: ${document.getElementById('base_pis').value}%`);
-      write(`CST COFINS: ${document.getElementById('cst_cofins').value}`);
-      write(`Base COFINS: ${document.getElementById('base_cofins').value}%`);
-      write(`Aliquota: ${document.getElementById('aliquota').value}%`);
-
-      // NCM exceções
-      if(document.getElementById('has_exceptions_ncm').value==='Sim'){
-        write('### Exceções de NCM');
-        write(document.getElementById('ncm_exceptions').value);
+      let y;
+      function gen(doc, lines){
+        y=20;
+        lines.forEach(l=>{ doc.text(l,20,y); y+=10; });
       }
-
-      // fora
-      if(document.getElementById('has_natureza_fora').value==='Sim'){
-        write('### Natureza fora do Estado');
-        write(`CSOSN: ${document.getElementById('csosn_fora').value}`);
-        write(`CFOP: ${document.getElementById('cfop_fora').value}`);
-        write(`ICMS DIFAL: ${document.getElementById('icms_difal_fora').value}`);
-        write(`CST IPI: ${document.getElementById('cst_ipi_fora').value}`);
-        write(`Aliquota IPI: ${document.getElementById('aliquota_ipi_fora').value}%`);
-        write(`CST ISSQN: ${document.getElementById('cst_issqn_fora').options[document.getElementById('cst_issqn_fora').selectedIndex].text}`);
-        write(`Aliquota ISSQN: ${document.getElementById('aliquota_issqn_fora').value}%`);
-        write(`Base ISSQN: ${document.getElementById('base_issqn_fora').value}%`);
-        write(`Descontar ISS: ${document.getElementById('descontar_iss_fora').value}`);
-        write(`CST PIS: ${document.getElementById('cst_pis_fora').value}`);
-        write(`Base PIS: ${document.getElementById('base_pis_fora').value}%`);
-        write(`CST COFINS: ${document.getElementById('cst_cofins_fora').value}`);
-        write(`Base COFINS: ${document.getElementById('base_cofins_fora').value}%`);
-        write(`Aliquota: ${document.getElementById('aliquota_fora').value}%`);
+      // Intra-Estado
+      const intra=[
+        'Natureza Intra-Estado',
+        `CSOSN: ${csosn.value}`, `CFOP: ${cfop.value}`, `ICMS DIFAL: ${icms_difal.value}`,
+        `CST IPI: ${cst_ipi.value}`, `Aliq IPI: ${aliquota_ipi.value}%`,
+        `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Aliq ISSQN: ${aliquota_issqn.value}%`,
+        `Base ISSQN: ${base_issqn.value}%`, `Descontar ISS: ${descontar_iss.value}`,
+        `CST PIS: ${cst_pis.value}`, `Base PIS: ${base_pis.value}%`,
+        `CST COFINS: ${cst_cofins.value}`, `Base COFINS: ${base_cofins.value}%`,
+        `Alíquota: ${aliquota.value}%`
+      ];
+      const doc1=new jsPDF(); gen(doc1,intra); doc1.save('Natureza_IntraEstado.pdf');
+      // Fora-Estado
+      if(has_natureza_fora.value==='Sim'){
+        const fora=[
+          'Natureza Fora-Estado',
+          `CSOSN: ${csosn_fora.value}`, `CFOP: ${cfop_fora.value}`, `ICMS DIFAL: ${icms_difal_fora.value}`,
+          `CST IPI: ${cst_ipi_fora.value}`, `Aliq IPI: ${aliquota_ipi_fora.value}%`,
+          `CST ISSQN: ${cst_issqn_fora.options[cst_issqn_fora.selectedIndex].text}`,
+          `Aliq ISSQN: ${aliquota_issqn_fora.value}%`, `Base ISSQN: ${base_issqn_fora.value}%`,
+          `Descontar ISS: ${descontar_iss_fora.value}`, `CST PIS: ${cst_pis_fora.value}`, `Base PIS: ${base_pis_fora.value}%`,
+          `CST COFINS: ${cst_cofins_fora.value}`, `Base COFINS: ${base_cofins_fora.value}%`,
+          `Alíquota: ${aliquota_fora.value}%`
+        ];
+        const doc2=new jsPDF(); gen(doc2,fora); doc2.save('Natureza_ForaEstado.pdf');
       }
-
-      doc.save('Formulario_Fiscal.pdf');
+      // Exceções NCM
+      if(has_exceptions_ncm.value==='Sim'){
+        const tags=['Exceções de NCM'];
+        document.querySelectorAll('#ncm_tags .tag').forEach(t=>tags.push(t.textContent));
+        const doc3=new jsPDF(); gen(doc3,tags); doc3.save('Excecoes_NCM.pdf');
+      }
     });
   </script>
 
