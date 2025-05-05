@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     // 1) Toggle de exibição do bloco “Dentro do Estado”
-    document.getElementById('has_natureza_dentro').addEventListener('change', function(){
+    document.getElementById('has_natureza_dentro').addEventListener('change', function () {
       document.getElementById('natureza_padrao').style.display =
         this.value === 'Sim' ? 'block' : 'none';
     });
   
     // 2) Listener de exceções de NCM
-    document.getElementById('has_exceptions_ncm').addEventListener('change', function(){
+    document.getElementById('has_exceptions_ncm').addEventListener('change', function () {
       document.getElementById('ncm_exceptions_group').style.display =
         this.value === 'Sim' ? 'block' : 'none';
       document.getElementById('exceptions_block').style.display =
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (this.value !== 'Sim') document.getElementById('ncm_tags').innerHTML = '';
     });
   
-    document.getElementById('ncm_exceptions').addEventListener('keypress', function(e){
+    document.getElementById('ncm_exceptions').addEventListener('keypress', function (e) {
       if (e.key === 'Enter') {
         e.preventDefault();
         const val = this.value.trim();
@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   
     // 3) Listener de “Fora do Estado”
-    document.getElementById('has_natureza_fora').addEventListener('change', function(){
+    document.getElementById('has_natureza_fora').addEventListener('change', function () {
       document.getElementById('natureza_fora').style.display =
         this.value === 'Sim' ? 'block' : 'none';
     });
   
     // 4) Submit handler
-    document.getElementById('formFiscal').addEventListener('submit', function(e){
+    document.getElementById('formFiscal').addEventListener('submit', function (e) {
       e.preventDefault();
       const { jsPDF } = window.jspdf;
       const logoSrc = document.getElementById('logopdf')?.src || '';
@@ -54,14 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
   
-      // Função utilitária para obter valor de campo
       const g = id => document.getElementById(id)?.value || '';
       const gt = id => {
         const el = document.getElementById(id);
         return el ? el.options[el.selectedIndex]?.text || '' : '';
-      }
+      };
   
-      function gen(doc, lines, title){
+      function gen(doc, lines, title) {
         let y = 20;
         const w = doc.internal.pageSize.getWidth();
         if (logoSrc) {
@@ -72,37 +71,42 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.setTextColor(40);
         doc.text(title, w / 2, y, { align: 'center' });
         y += 10;
-        const body = lines.map(l => [ l.split(':')[0], l.split(':').slice(1).join(':').trim() ]);
+        const body = lines.map(l => [l.split(':')[0], l.split(':').slice(1).join(':').trim()]);
         doc.autoTable({
           startY: y + 5,
-          head: [['Campo','Valor']],
+          head: [['Campo', 'Valor']],
           body,
           theme: 'grid',
           styles: { fontSize: 10 },
-          headStyles: { fillColor: [0,0,0], textColor: 255 },
-          alternateRowStyles: { fillColor: [240,240,240] }
+          headStyles: { fillColor: [0, 0, 0], textColor: 255 },
+          alternateRowStyles: { fillColor: [240, 240, 240] }
         });
       }
   
       const tags = document.querySelectorAll('#ncm_tags .tag');
       const tagTexts = Array.from(tags).map(t => `NCM: ${t.textContent}`);
   
-      const blockData = (prefix = '') => [
-        `CSOSN: ${g(prefix + 'csosn')}`,
-        `CFOP: ${g(prefix + 'cfop')}`,
-        `ICMS DIFAL: ${g(prefix + 'icms_difal')}`,
-        `CST IPI: ${g(prefix + 'cst_ipi')}`,
-        `Alíquota IPI: ${g(prefix + 'aliquota_ipi')}%`,
-        `CST ISSQN: ${gt(prefix + 'cst_issqn')}`,
-        `Alíquota ISSQN: ${g(prefix + 'aliquota_issqn')}%`,
-        `Base ISSQN: ${g(prefix + 'base_issqn')}%`,
-        `Descontar ISS: ${g(prefix + 'descontar_iss')}`,
-        `CST PIS: ${g(prefix + 'cst_pis')}`,
-        `Base PIS: ${g(prefix + 'base_pis')}%`,
-        `CST COFINS: ${g(prefix + 'cst_cofins')}`,
-        `Base COFINS: ${g(prefix + 'base_cofins')}%`,
-        `Alíquota COFINS: ${g(prefix + 'aliquota') || g(prefix + 'aliquota_fora') || g(prefix + 'aliquota_exc')}%`
-      ];
+      const blockData = (prefix = '') => {
+        const suffix = prefix ? '_' + prefix : ''; // ex: _fora
+        return [
+          `CSOSN: ${g('csosn' + suffix)}`,
+          `CFOP: ${g('cfop' + suffix)}`,
+          `ICMS DIFAL: ${g('icms_difal' + suffix)}`,
+          `CST IPI: ${g('cst_ipi' + suffix)}`,
+          `Alíquota IPI: ${g('aliquota_ipi' + suffix) || ''}%`,
+          `CST ISSQN: ${gt('cst_issqn' + suffix)}`,
+          `Alíquota ISSQN: ${g('aliquota_issqn' + suffix) || ''}%`,
+          `Base ISSQN: ${g('base_issqn' + suffix) || ''}%`,
+          `Descontar ISS: ${g('descontar_iss' + suffix)}`,
+          `CST PIS: ${g('cst_pis' + suffix)}`,
+          `Base PIS: ${g('base_pis' + suffix) || ''}%`,
+          `CST COFINS: ${g('cst_cofins' + suffix)}`,
+          `Base COFINS: ${g('base_cofins' + suffix) || ''}%`,
+          `Alíquota COFINS: ${g('aliquota' + suffix) || g('aliquota_cofins' + suffix) || ''}%`
+        ];
+      };
+      
+      
   
       const doc1 = new jsPDF();
       gen(doc1, ['Natureza de Operação dentro do Estado', ...blockData()], 'Configuração Fiscal - Dentro do Estado');
@@ -115,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
       if (hasExceptionsNCM === 'Sim') {
         const docExc = new jsPDF();
-        gen(docExc, ['Natureza para NCM’s Exceções', ...blockData(''), ...tagTexts], 'Configuração Fiscal - Exceções de NCM');
+        gen(docExc, ['Natureza para NCM’s Exceções', ...blockData(), ...tagTexts], 'Configuração Fiscal - Exceções de NCM');
         docExc.save('Config. Natureza de Operação - Exceções de NCM.pdf');
       }
   
