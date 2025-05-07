@@ -57,6 +57,6 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
     `Alíquota COFINS: ${aliquota.value}%`
   ];
 
-  gen(doc1, intra, 'Configuração Fiscal - Dentro do Estado');
+  gen(doc1, intra, 'Natureza de Operação de Vendas - Simples Nacional');
   doc1.save('Config. Natureza de Operação - Dentro do Estado.pdf');
 });
