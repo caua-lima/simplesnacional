@@ -25,7 +25,7 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
     const pageWidth = doc.internal.pageSize.getWidth();
     
     // Adicionar a imagem da logo ao PDF
-    const logoSrc = '../imagens/THUB-branco.png';  // Caminho da imagem da logo
+    const logoSrc = '../imagens/THUB-preto.png';  // Caminho da imagem da logo
     doc.addImage(logoSrc, 'PNG', (pageWidth - 80) / 2, 10, 50, 20); // Adicionando logo no PDF
     
     doc.setFontSize(14);
