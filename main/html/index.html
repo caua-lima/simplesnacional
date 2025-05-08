@@ -25,6 +25,7 @@
       background: #000;
       color: #fff;
       padding: 10px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombras para destacar o cabeçalho */
     }
 
     .header img {
@@ -35,10 +36,12 @@
       color: #fff;
       margin: 0 15px;
       text-decoration: none;
+      font-weight: bold;
     }
 
     .header nav a:hover {
       text-decoration: underline;
+      color: #007bff; /* Cor do hover */
     }
 
     /* Estilo do título */
@@ -46,22 +49,25 @@
       text-align: center;
       margin-top: 50px;
       font-size: 36px;
-      color: #333;
+      color: black;
+      font-weight: bold;
     }
 
+    /* Container principal */
     .container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      flex-grow: 1; /* Faz o container ocupar o espaço restante */
+      flex-grow: 1;
       padding: 20px;
-    }	
+    }
 
     /* Estilo dos botões */
     .btn-group {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       margin-top: 20px;
     }
 
@@ -71,16 +77,19 @@
       font-size: 18px;
       padding: 15px;
       border-radius: 8px; /* Bordas arredondadas para os botões */
+      transition: background-color 0.3s, transform 0.3s; /* Efeito de transição suave */
     }
 
     .btn-primary {
       background-color: black; /* Cor de fundo dos botões */
       border: none;
+      color: white;
     }
 
     .btn-primary:hover {
       background-color: #0056b3; /* Cor de fundo quando o mouse passa sobre o botão */
       border-color: #0056b3;
+      transform: scale(1.05); /* Aumenta ligeiramente o botão ao passar o mouse */
     }
 
     /* Estilo do rodapé */
@@ -92,12 +101,31 @@
       margin-top: auto; /* Faz o rodapé sempre ficar na parte inferior */
     }
 
-    /* Cor do rodapé */
     .footer p {
       margin: 0;
       font-size: 14px;
     }
 
+    /* Responsividade para dispositivos móveis */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 28px; /* Reduz o tamanho da fonte para telas pequenas */
+      }
+
+      .header img {
+        height: 50px; /* Ajusta o logo em dispositivos móveis */
+      }
+
+      .btn-group {
+        flex-direction: column; /* Empilha os botões na versão móvel */
+        align-items: center; /* Centraliza os botões */
+      }
+
+      .btn-group .btn {
+        width: 80%; /* Deixa os botões mais largos em telas pequenas */
+        margin: 10px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -109,7 +137,7 @@
       <a href="index.html">Início</a>
       <a href="simplesnacional-dentro.html">Simples Nacional</a>
       <a href="lucroreal-dentro.html">Lucro Real</a>
-      <a href="excecoes.html">Exceções</a>
+      <a href="excecoes.html">Exceções de NCM</a>
     </nav>
   </div>
 
