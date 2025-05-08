@@ -8,16 +8,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
+    body { font-family: Arial, sans-serif; background: #f4f4f4; color: black; }
     .header { display: flex; justify-content: space-between; align-items: center; background: #000; color: #fff; padding: 10px 20px; }
-    .header img { height: 150px; }
+    .header img { height: 180px; }
     .header nav a { color: #fff; margin: 0 15px; text-decoration: none; }
     .header nav a:hover { text-decoration: underline; }
-    h2 { text-align: center; margin: 30px 0; }
-    .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top: 30px; }
+    h2 { text-align: center; margin: 50px 0; }
+    .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top: 100px; }
     .form-control { margin-top: 5px; margin-bottom: 15px; }
     .btn-primary { background: #000; border: none; }
-    .footer { background: #000; color: #fff; text-align: center; padding: 30px 0; margin-top: 30px; }
+    .footer { background: #000; color: #fff; text-align: center; padding: 30px 0; margin-top: 100px; }
   </style>
 </head>
 <body>
@@ -33,7 +33,7 @@
   </div>
 
   <div class="container">
-    <h2>Natureza de Operação de Vendas - Simples Nacional</h2>
+    <h2>Natureza de Operação de Vendas dentro do Estado - Simples Nacional</h2>
     <form id="formFiscal">
 
       <!-- Bloco padrão de Natureza de Operação (intra-estado) -->
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group">
           <label for="cfop">CFOP:</label>
-          <input type="text" id="cfop" name="cfop" class="form-control" required pattern="^\d{4}$" maxlength="4"/>
+          <input type="text" id="cfop" name="cfop" class="form-control short" required pattern="^\d{4}$" maxlength="4"/>
         </div>
         <div class="form-group">
           <label for="icms_difal">ICMS DIFAL para não contribuinte:</label>
