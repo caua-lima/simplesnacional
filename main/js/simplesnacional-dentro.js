@@ -26,7 +26,7 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
     
     // Adicionar a imagem da logo ao PDF
     const logoSrc = '../imagens/THUB-preto.png';  // Caminho da imagem da logo
-    doc.addImage(logoSrc, 'PNG', (pageWidth - 80) / 2, 10, 50, 20); // Adicionando logo no PDF
+    doc.addImage(logoSrc, 'PNG', (pageWidth - 120) / 2, -5, 90, 45); // Ajustando para aumentar o tamanho da logo
     
     doc.setFontSize(14);
     doc.setTextColor(40);
