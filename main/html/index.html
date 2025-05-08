@@ -4,28 +4,116 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menu Principal</title>
+  <!-- Link do Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; color: black; }
-    .header { display: flex; justify-content: space-between; align-items: center; background: #000; color: #fff; padding: 10px 20px; }
-    .header img { height: 150px; }
-    .header nav a { color: #fff; margin: 0 15px; text-decoration: none; }
-    .header nav a:hover { text-decoration: underline; }
-    h2 { text-align: center; margin-top: 50px; }
-    .btn-group { display: flex; justify-content: center; margin-top: 20px; }
-    .btn-group .btn { width: 200px; margin: 10px; }
-    .footer { background: #000; color: #fff; text-align: center; padding: 30px 0; margin-top: 50px; }
+    /* Estilo do corpo */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* Garante que o corpo ocupe 100% da altura da tela */
+    }
+
+    /* Estilo do cabeçalho */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    .header img {
+      height: 180px; /* Ajustando o tamanho do logo */
+    }
+
+    .header nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    .header nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* Estilo do título */
+    h2 {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 36px;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1; /* Faz o container ocupar o espaço restante */
+      padding: 20px;
+    }	
+
+    /* Estilo dos botões */
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .btn-group .btn {
+      width: 250px;
+      margin: 10px;
+      font-size: 18px;
+      padding: 15px;
+      border-radius: 8px; /* Bordas arredondadas para os botões */
+    }
+
+    .btn-primary {
+      background-color: black; /* Cor de fundo dos botões */
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3; /* Cor de fundo quando o mouse passa sobre o botão */
+      border-color: #0056b3;
+    }
+
+    /* Estilo do rodapé */
+    .footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: auto; /* Faz o rodapé sempre ficar na parte inferior */
+    }
+
+    /* Cor do rodapé */
+    .footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
   </style>
 </head>
 <body>
 
+  <!-- Cabeçalho -->
   <div class="header">
     <a href="javascript:location.reload();"><img src="../imagens/THUB-branco.png" alt="Logo T.HUB"></a>
     <nav>
-      <a href="#">Início</a>
+      <a href="index.html">Início</a>
+      <a href="simplesnacional-dentro.html">Simples Nacional</a>
+      <a href="lucroreal-dentro.html">Lucro Real</a>
+      <a href="excecoes.html">Exceções</a>
     </nav>
   </div>
 
+  <!-- Conteúdo principal -->
   <div class="container">
     <h2>Escolha uma opção</h2>
     
@@ -36,9 +124,14 @@
     </div>
   </div>
 
+  <!-- Rodapé -->
   <div class="footer">
     <p>&copy; 2025 T.HUB - Todos os direitos reservados</p>
   </div>
 
+  <!-- Scripts do Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
