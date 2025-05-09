@@ -4,56 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Menu Principal</title>
-  <!-- Link do Bootstrap -->
+  <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
   <style>
-    /* Estilo do corpo */
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f4;
       color: black;
       display: flex;
       flex-direction: column;
-      min-height: 100vh; /* Garante que o corpo ocupe 100% da altura da tela */
+      min-height: 100vh;
     }
 
-    /* Estilo do cabeçalho */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #000;
-      color: #fff;
-      padding: 10px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombras para destacar o cabeçalho */
-    }
-
-    .header img {
-      height: 180px; /* Ajustando o tamanho do logo */
-    }
-
-    .header nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .header nav a:hover {
-      text-decoration: underline;
-      color: #007bff; /* Cor do hover */
-    }
-
-    /* Estilo do título */
-    h2 {
-      text-align: center;
-      margin-top: 50px;
-      font-size: 36px;
-      color: black;
-      font-weight: bold;
-    }
-
-    /* Container principal */
     .container {
       display: flex;
       flex-direction: column;
@@ -63,12 +25,11 @@
       padding: 20px;
     }
 
-    /* Estilo dos botões */
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 20px;
+    h2 {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 36px;
+      font-weight: bold;
     }
 
     .btn-group .btn {
@@ -76,75 +37,73 @@
       margin: 10px;
       font-size: 18px;
       padding: 15px;
-      border-radius: 8px; /* Bordas arredondadas para os botões */
-      transition: background-color 0.3s, transform 0.3s; /* Efeito de transição suave */
+      border-radius: 8px;
+      transition: background-color 0.3s, transform 0.3s;
     }
 
     .btn-primary {
-      background-color: black; /* Cor de fundo dos botões */
+      background-color: black;
       border: none;
       color: white;
     }
-
     .btn-primary:hover {
-      background-color: #0056b3; /* Cor de fundo quando o mouse passa sobre o botão */
+      background-color: #0056b3;
       border-color: #0056b3;
-      transform: scale(1.05); /* Aumenta ligeiramente o botão ao passar o mouse */
+      transform: scale(1.05);
     }
 
-    /* Estilo do rodapé */
+    /* Footer sempre abaixo */
     .footer {
       background: #000;
       color: #fff;
       text-align: center;
       padding: 30px 0;
-      margin-top: auto; /* Faz o rodapé sempre ficar na parte inferior */
+      margin-top: auto;
     }
-
     .footer p {
       margin: 0;
       font-size: 14px;
     }
 
-    /* Responsividade para dispositivos móveis */
+    /* Opcional: ajustar toggler */
+    .navbar-toggler {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
     @media (max-width: 768px) {
-      h2 {
-        font-size: 28px; /* Reduz o tamanho da fonte para telas pequenas */
-      }
-
-      .header img {
-        height: 60px; /* Ajusta o logo em dispositivos móveis */
-      }
-
-      .btn-group {
-        flex-direction: column; /* Empilha os botões na versão móvel */
-        align-items: center; /* Centraliza os botões */
-      }
-
-      .btn-group .btn {
-        width: 80%; /* Deixa os botões mais largos em telas pequenas */
-        margin: 10px 0;
-      }
+      h2 { font-size: 28px; }
+      .btn-group .btn { width: 80%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Cabeçalho -->
-  <div class="header">
-    <a href="javascript:location.reload();"><img src="../imagens/THUB-branco.png" alt="Logo T.HUB"></a>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="simplesnacional-dentro.html">Simples Nacional</a>
-      <a href="lucroreal-dentro.html">Lucro Real</a>
-      <a href="excecoes.html">Exceções de NCM</a>
-    </nav>
-  </div>
+  <!-- NAVBAR RESPONSIVO -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="index.html">
+      <img src="../imagens/THUB-branco.png" alt="Logo T.HUB" height="60">
+    </a>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse"
+            data-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Alternar navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="simplesnacional-dentro.html">Simples Nacional</a></li>
+        <li class="nav-item"><a class="nav-link" href="lucroreal-dentro.html">Lucro Real</a></li>
+        <li class="nav-item"><a class="nav-link" href="excecoes.html">Exceções de NCM</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <!-- Conteúdo principal -->
   <div class="container">
     <h2>Escolha uma opção</h2>
-    
     <div class="btn-group">
       <a href="simplesnacional-dentro.html" class="btn btn-primary">Simples Nacional</a>
       <a href="lucroreal-dentro.html" class="btn btn-primary">Lucro Real</a>
@@ -157,7 +116,7 @@
     <p>&copy; 2025 T.HUB - Todos os direitos reservados</p>
   </div>
 
-  <!-- Scripts do Bootstrap -->
+  <!-- Bootstrap JS + Popper -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
