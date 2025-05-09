@@ -3,12 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu Principal – T.HUB</title>
+  <title>Página Inicial – T.HUB</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
   <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+    * {
+        font-family: 'Montserrat', sans-serif;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       background: #f4f4f4;
       color: #000;
       display: flex;
@@ -23,7 +29,6 @@
     }
     .navbar-custom .navbar-nav .nav-link {
       color: #fff !important;
-      font-family: Arial, sans-serif;
       font-weight: bold;
     }
     .navbar-custom .navbar-nav .nav-link:hover {
@@ -36,13 +41,13 @@
 
     /* Conteúdo principal */
     .page-container {
-      flex: 1;
+      flex: 0.2;
       padding: 20px;
-      max-width: 800px;
+      max-width: 1000px;
       margin: 40px auto;
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 10px 8px rgba(0,0,0,0.1);
     }
     .page-container h2 {
       text-align: center;
@@ -55,16 +60,20 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      border-radius: 12px; 
+
     }
+    
     .btn-group .btn {
       width: 250px;
       margin: 10px;
       font-size: 18px;
       padding: 15px;
-      border-radius: 8px;
+      border-radius: 12px;
       transition: background-color 0.3s, transform 0.3s;
     }
     .btn-primary {
+      border-radius: 12px; 
       background-color: #000;
       border: none;
       color: #fff;
@@ -74,6 +83,10 @@
       border-color: #0056b3;
       transform: scale(1.05);
     }
+
+    .btn-group > .btn {
+      border-radius: 12px !important;
+  } 
 
     /* Footer */
     .footer {
@@ -107,7 +120,7 @@
 
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link active" href="index.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
         <li class="nav-item"><a class="nav-link" href="simplesnacional-dentro.html">Simples Nacional</a></li>
         <li class="nav-item"><a class="nav-link" href="lucroreal-dentro.html">Lucro Real</a></li>
         <li class="nav-item"><a class="nav-link" href="excecoes.html">Exceções de NCM</a></li>
