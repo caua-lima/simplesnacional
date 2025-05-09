@@ -1,115 +1,165 @@
 <!DOCTYPE html>
+<!-- Declaração do tipo de documento HTML5 -->
+
 <html lang="pt-br">
+<!-- Início do documento HTML; atributo lang define o idioma como Português (Brasil) -->
+
 <head>
+  <!-- Seção de metadados e configuração geral da página -->
+  
   <meta charset="UTF-8" />
+  <!-- Define a codificação de caracteres para UTF-8, garantindo suporte a acentos e símbolos -->
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Faz a página responsiva: ajusta a largura ao dispositivo e define nível de zoom inicial -->
+  
   <title>Página Inicial – T.HUB</title>
+  <!-- Título que aparece na aba do navegador -->
+  
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Importa o framework Bootstrap para facilitar a criação de layouts responsivos e estilos prontos -->
+  
   <style>
-
+    /* ===========================
+       IMPORTAÇÃO DE FONTS
+       =========================== */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    /* Traz as fontes Montserrat e Roboto do Google Fonts */
 
+    /* ===========================
+       RESET E FONTE PADRÃO
+       =========================== */
     * {
-        font-family: 'Montserrat', sans-serif;
+      font-family: 'Montserrat', sans-serif;
+      /* Aplica Montserrat a todos os elementos; sans-serif como fallback */
     }
 
+    /* ===========================
+       ESTILO DO BODY
+       =========================== */
     body {
-      background: #f4f4f4;
-      color: #000;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      margin: 0;
+      background: #f4f4f4;            /* Cor de fundo clara */
+      color: #000;                    /* Texto na cor preta */
+      display: flex;                  /* Flexbox para layout vertical */
+      flex-direction: column;         /* Empilha filhos de cima para baixo */
+      min-height: 100vh;              /* Garante altura mínima igual à altura da tela */
+      margin: 0;                      /* Remove margens padrão do navegador */
     }
 
-    /* Navbar customizada */
+    /* ===========================
+       NAVBAR CUSTOMIZADA
+       =========================== */
     .navbar-custom {
-      background-color: #000 !important;
+      background-color: #000 !important;  /* Fundo preto; !important para sobrescrever Bootstrap */
     }
     .navbar-custom .navbar-nav .nav-link {
-      color: #fff !important;
-      font-weight: bold;
+      color: #fff !important;             /* Links em branco */
+      font-weight: bold;                  /* Texto em negrito */
+      margin: 0 1rem;                     /* Espaçamento horizontal entre os links */
     }
     .navbar-custom .navbar-nav .nav-link:hover {
-      color: #007bff !important;
-      transition: color 0.5s ease-in-out;
+      color: #007bff !important;          /* Azul do Bootstrap ao passar o mouse */
+      transition: color 0.5s ease-in-out; /* Animação suave na troca de cor */
     }
     .navbar-custom .navbar-nav .nav-link.active {
-      color: #007bff !important;
+      color: #007bff !important;          /* Azul para o link ativo */
     }
 
-    /* Conteúdo principal */
+    /* ===========================
+       AJUSTE DA LOGO EM MOBILE
+       =========================== */
+    @media (max-width: 576px) {
+      .navbar-brand img {
+        height: 70px;                   /* Reduz a altura da imagem da logo em telas pequenas */
+      }
+    }
+
+    /* ===========================
+       CONTEÚDO PRINCIPAL (CAIXA BRANCA)
+       =========================== */
     .page-container {
-      flex: 0.2;
-      padding: 20px;
-      max-width: 1000px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 10px 8px rgba(0,0,0,0.1);
+      flex: 0.2;                        /* Flex-grow reduzido para ocupar só o necessário */
+      padding: 20px;                    /* Espaço interno */
+      max-width: 1000px;                /* Largura máxima para não esticar demais em telas largas */
+      margin: 40px auto;                /* Centraliza horizontalmente e adiciona margem superior/ inferior */
+      background: #fff;                 /* Fundo branco */
+      border-radius: 12px;              /* Borda arredondada */
+      box-shadow: 0 10px 8px rgba(0,0,0,0.1); /* Sombra sutil */
     }
     .page-container h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: bold;
+      text-align: center;               /* Centraliza título */
+      margin-bottom: 30px;              /* Espaço abaixo do título */
+      font-weight: bold;                /* Negrito */
     }
 
-    /* Botões de opção */
+    /* ===========================
+       GRUPO DE BOTÕES (OPÇÕES)
+       =========================== */
     .btn-group {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      border-radius: 12px; 
-
+      display: flex;                    /* Flexbox para organizar botões em linha */
+      justify-content: center;          /* Centraliza os botões */
+      flex-wrap: wrap;                  /* Permite quebra de linha se der overflow */
+      border-radius: 12px;              /* Arredonda contorno do grupo */
     }
-    
     .btn-group .btn {
-      width: 250px;
-      margin: 10px;
-      font-size: 18px;
-      padding: 15px;
-      border-radius: 12px;
+      width: 250px;                     /* Largura fixa de cada botão */
+      margin: 10px;                     /* Espaço externo entre botões */
+      font-size: 18px;                  /* Tamanho da fonte */
+      padding: 15px;                    /* Espaço interno */
+      border-radius: 12px;              /* Bordas arredondadas */
       transition: background-color 0.3s, transform 0.3s;
+      /* Animação suave de cor e leve “zoom” */
     }
     .btn-primary {
-      border-radius: 12px; 
-      background-color: #000;
-      border: none;
-      color: #fff;
+      background-color: #000;           /* Fundo preto */
+      border: none;                     /* Sem borda default */
+      color: #fff;                      /* Texto branco */
     }
     .btn-primary:hover {
-      background-color: #0056b3;
-      border-color: #0056b3;
-      transform: scale(1.05);
+      background-color: #0056b3;        /* Azul escuro no hover */
+      border-color: #0056b3;            /* Ajusta borda no hover */
+      transform: scale(1.05);           /* Aumenta 5% ao passar o mouse */
     }
 
-    .btn-group > .btn {
-      border-radius: 12px !important;
-  } 
-
-    /* Footer */
+    /* ===========================
+       RODAPÉ (FOOTER)
+       =========================== */
     .footer {
-      background: #000;
-      color: #fff;
-      text-align: center;
-      padding: 20px 0;
-      margin-top: auto;
+      background: #000;                  /* Fundo preto */
+      color: #fff;                       /* Texto branco */
+      text-align: center;                /* Centraliza texto */
+      padding: 20px 0;                   /* Espaço interno vertical */
+      margin-top: auto;                  /* Empurra para o final da página */
     }
     .footer p {
-      margin: 0;
-      font-size: 14px;
+      margin: 0;                         /* Remove margem default do parágrafo */
+      font-size: 14px;                   /* Tamanho de fonte menor */
     }
+
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR RESPONSIVO -->
+  <!-- ===========================
+       NAVBAR RESPONSIVO (TOPO)
+       =========================== -->
   <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+    <!-- 
+      navbar-expand-md: a barra se expande (exibe links) em telas ≥768px;
+      navbar-dark: ajusta ícones e texto para fundos escuros;
+      navbar-custom: nossas regras acima
+    -->
     <a class="navbar-brand" href="index.html">
-      <img src="../imagens/THUB-branco.png" alt="Logo T.HUB" height="180">
+      <!-- Link para a página inicial -->
+      <img src="../imagens/THUB-branco.png"
+           alt="Logo T.HUB"
+           height="180">
+      <!-- Atributo height controlado por CSS e HTML; em mobile reduzido pela @media -->
     </a>
-    <button class="navbar-toggler" type="button"
+    <!-- Botão “hambúrguer” que aparece em telas pequenas -->
+    <button class="navbar-toggler"
+            type="button"
             data-toggle="collapse"
             data-target="#mainNavbar"
             aria-controls="mainNavbar"
@@ -118,34 +168,61 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Itens de navegação que colapsam em mobile -->
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
-        <li class="nav-item"><a class="nav-link" href="simplesnacional-dentro.html">Simples Nacional</a></li>
-        <li class="nav-item"><a class="nav-link" href="lucroreal-dentro.html">Lucro Real</a></li>
-        <li class="nav-item"><a class="nav-link" href="excecoes.html">Exceções de NCM</a></li>
+        <!-- ml-auto empurra o menu para a direita -->
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="simplesnacional-dentro.html">Simples Nacional</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="lucroreal-dentro.html">Lucro Real</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="excecoes.html">Exceções de NCM</a>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <!-- CONTEÚDO PRINCIPAL -->
+  <!-- ===========================
+       CONTEÚDO PRINCIPAL
+       =========================== -->
   <div class="page-container">
     <h2>Escolha uma opção</h2>
     <div class="btn-group">
-      <a href="simplesnacional-dentro.html" class="btn btn-primary">Simples Nacional</a>
-      <a href="lucroreal-dentro.html" class="btn btn-primary">Lucro Real</a>
-      <a href="excecoes.html" class="btn btn-primary">Exceções de NCM</a>
+      <!-- Cada botão leva a uma seção específica -->
+      <a href="simplesnacional-dentro.html" class="btn btn-primary">
+        Simples Nacional
+      </a>
+      <a href="lucroreal-dentro.html" class="btn btn-primary">
+        Lucro Real
+      </a>
+      <a href="excecoes.html" class="btn btn-primary">
+        Exceções de NCM
+      </a>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- ===========================
+       FOOTER / RODAPÉ
+       =========================== -->
   <div class="footer">
     <p>&copy; 2025 T.HUB – Todos os direitos reservados</p>
   </div>
 
-  <!-- Bootstrap JS + Popper + jQuery -->
+  <!-- ===========================
+       SCRIPTS DO BOOTSTRAP
+       =========================== -->
+  <!-- jQuery (necessário para o Bootstrap 4) -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Popper.js (controle de dropdowns, tooltips, etc.) -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <!-- JavaScript do Bootstrap -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
