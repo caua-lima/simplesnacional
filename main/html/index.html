@@ -16,6 +16,16 @@
       min-height: 100vh;
     }
 
+    .navbar-custom{
+      background-color: #000 !important;
+    }
+    .navbar-custom .navbar-nav .nav-link:hover {
+      color: #007bff !important;
+      /* se quiser um efeito de transição suave: */
+      transition: color 1.0s ease-in-out;
+}
+    
+
     .container {
       display: flex;
       flex-direction: column;
@@ -79,9 +89,9 @@
 <body>
 
   <!-- NAVBAR RESPONSIVO -->
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
     <a class="navbar-brand" href="index.html">
-      <img src="../imagens/THUB-branco.png" alt="Logo T.HUB" height="60">
+      <img src="../imagens/THUB-branco.png" alt="Logo T.HUB" height="180">
     </a>
     <button class="navbar-toggler" type="button"
             data-toggle="collapse"
