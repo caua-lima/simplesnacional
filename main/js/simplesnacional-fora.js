@@ -58,7 +58,7 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
     ];
   
     gen(doc1, intra, 'Natureza de Operação de Vendas - Simples Nacional');
-    doc1.save('Config. Natureza de Operação - Fora do Estado.pdf');
+    doc1.save('Natureza de Operação de Vendas - Simples Nacional ( Fora do Estado).pdf');
   
     window.location.href = 'index.html'
   });

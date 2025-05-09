@@ -57,8 +57,8 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
     `Alíquota COFINS: ${aliquota.value}%`
   ];
 
-  gen(doc1, intra, 'Natureza de Operação de Vendas - Simples Nacional');
-  doc1.save('Config. Natureza de Operação - Dentro do Estado.pdf');
+  gen(doc1, intra, 'Natureza de Operação de Vendas - Lucro Real');
+  doc1.save('Natureza de Operação de Vendas - Lucro Real ( Dentro do Estado)');
 
-  window.location.href = 'simplesnacional-fora.html'
+  window.location.href = 'lucroreal-fora.html'
 });
