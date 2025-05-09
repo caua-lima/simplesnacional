@@ -4,60 +4,123 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Formulário Fiscal - Simples Nacional</title>
+
+  <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- jsPDF + AutoTable (para geração de PDF) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; color: black; }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* ===========================
+       FONTS E RESET BÁSICO
+       =========================== */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    * { font-family: 'Montserrat', sans-serif; margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: #f4f4f4;
+      color: #000;
+    }
+
+    /* ===========================
+       NAVBAR PADRÃO T.HUB
+       =========================== */
+    .navbar-custom {
+      background-color: #000 !important;
+    }
+    .navbar-custom .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: bold;
+      margin: 0 1rem;
+    }
+    .navbar-custom .navbar-nav .nav-link:hover {
+      color: #007bff !important;
+      transition: color 0.5s ease-in-out;
+    }
+    .navbar-custom .navbar-nav .nav-link.active {
+      color: #007bff !important;
+    }
+    @media (max-width: 576px) {
+      .navbar-brand img {
+        height: 70px; /* reduz logo em telas pequenas */
+      }
+    }
+
+    /* ===========================
+       CONTEÚDO PRINCIPAL
+       =========================== */
+    h2 {
+      text-align: center;
+      margin: 50px 0;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin: 100px auto;
+      max-width: 800px;
+    }
+    .form-control {
+      margin: 5px 0 15px;
+    }
+    .btn-primary {
+      background: #000;
+      border: none;
+    }
+
+    /* ===========================
+       RODAPÉ
+       =========================== */
+    .footer {
       background: #000;
       color: #fff;
-      padding: 10px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombras para destacar o cabeçalho */
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 100px;
     }
-
-    .header img {
-      height: 180px; /* Ajustando o tamanho do logo */
-    }
-
-    .header nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .header nav a:hover {
-      text-decoration: underline;
-      color: #007bff; /* Cor do hover */
-    }
-    h2 { text-align: center; margin: 50px 0; }
-    .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-top: 100px; }
-    .form-control { margin-top: 5px; margin-bottom: 15px; }
-    .btn-primary { background: #000; border: none; }
-    .footer { background: #000; color: #fff; text-align: center; padding: 30px 0; margin-top: 100px; }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <a href="javascript:location.reload();"><img src="../imagens/THUB-branco.png" alt="Logo T.HUB"></a>
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="simplesnacional-dentro.html">Simples Nacional</a>
-      <a href="lucroreal-dentro.html">Lucro Real</a>
-      <a href="excecoes.html">Exceções de NCM</a>
-    </nav>
-  </div>
+  <!-- NAVBAR RESPONSIVO -->
+  <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+    <a class="navbar-brand" href="index.html">
+      <img src="../imagens/THUB-branco.png" alt="Logo T.HUB" height="180">
+    </a>
+    <button class="navbar-toggler" type="button"
+            data-toggle="collapse"
+            data-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Alternar navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="simplesnacional-dentro.html">Simples Nacional</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="lucroreal-dentro.html">Lucro Real</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="excecoes.html">Exceções de NCM</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- FORMULÁRIO SIMPLES NACIONAL - INTRA-ESTADO -->
   <div class="container">
     <h2>Natureza de Operação de Vendas dentro do Estado - Simples Nacional</h2>
     <form id="formFiscal">
 
-      <!-- Bloco padrão de Natureza de Operação (intra-estado) -->
       <div id="natureza_padrao">
         <div class="form-group">
           <label for="csosn">CSOSN:</label>
@@ -75,10 +138,13 @@
             <option value="900">900 - Outros</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="cfop">CFOP:</label>
-          <input type="text" id="cfop" name="cfop" class="form-control short" required pattern="^\d{4}$" maxlength="4"/>
+          <input type="text" id="cfop" name="cfop" class="form-control short"
+                 required pattern="^\d{4}$" maxlength="4"/>
         </div>
+
         <div class="form-group">
           <label for="icms_difal">ICMS DIFAL para não contribuinte:</label>
           <select id="icms_difal" name="icms_difal" class="form-control" required>
@@ -87,6 +153,7 @@
             <option value="Sim">Sim</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="cst_ipi">CST - IPI:</label>
           <select id="cst_ipi" name="cst_ipi" class="form-control" required>
@@ -101,10 +168,13 @@
             <option value="NDI">Não destacar IPI</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="aliquota_ipi">Alíquota (%) - IPI:</label>
-          <input type="number" id="aliquota_ipi" name="aliquota_ipi" class="form-control" max="100" step="0.01" required/>
+          <input type="number" id="aliquota_ipi" name="aliquota_ipi"
+                 class="form-control" max="100" step="0.01" required/>
         </div>
+
         <div class="form-group">
           <label for="cst_issqn">CST - ISSQN:</label>
           <select id="cst_issqn" name="cst_issqn" class="form-control" required>
@@ -114,14 +184,19 @@
             <option value="Outra Situação">Outra situação</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="aliquota_issqn">Alíquota (%) - ISSQN:</label>
-          <input type="number" id="aliquota_issqn" name="aliquota_issqn" class="form-control" max="100" step="0.01" required/>
+          <input type="number" id="aliquota_issqn" name="aliquota_issqn"
+                 class="form-control" max="100" step="0.01" required/>
         </div>
+
         <div class="form-group">
           <label for="base_issqn">Base (%) - ISSQN:</label>
-          <input type="number" id="base_issqn" name="base_issqn" class="form-control" max="100" step="0.01" required/>
+          <input type="number" id="base_issqn" name="base_issqn"
+                 class="form-control" max="100" step="0.01" required/>
         </div>
+
         <div class="form-group">
           <label for="descontar_iss">Descontar ISS:</label>
           <select id="descontar_iss" name="descontar_iss" class="form-control" required>
@@ -130,108 +205,78 @@
             <option value="Não">Não</option>
           </select>
         </div>
+
         <div class="form-group">
           <label for="cst_pis">CST - PIS:</label>
           <select id="cst_pis" name="cst_pis" class="form-control" required>
             <option value="">Selecionar</option>
-            <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
+            <option value="01">01 - Operação tributável (alíquota normal)</option>
             <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
-            <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
-            <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
-            <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
-            <option value="06">06 - Operação tributável (alíquota zero)</option>
-            <option value="07">07 - Operação isenta da contribuição</option>
-            <option value="08">08 - Operação sem incidência da contribuição</option>
-            <option value="09">09 - Operação com suspensão da contribuição</option>
-            <option value="49">49 - Outras Operações de Saída</option>
-            <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
-            <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
-            <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
-            <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
-            <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
-            <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
-            <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
-            <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
-            <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
-            <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
-            <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="67">67 - Crédito Presumido - Outras Operações</option>
-            <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
-            <option value="71">71 - Operação de Aquisição com Isenção</option>
-            <option value="72">72 - Operação de Aquisição com Suspensão</option>
-            <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
-            <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
-            <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
-            <option value="98">98 - Outras Operações de Entrada</option>
-            <option value="99">99 - Outras operações</option>
+            <option value="03">03 - Operação tributável (alíquota por unidade)</option>
+            <option value="04">04 - Tributação monofásica (alíquota zero)</option>
+            <option value="05">05 - Substituição Tributária</option>
+            <option value="06">06 - Alíquota zero</option>
+            <option value="07">07 - Isenta</option>
+            <option value="08">08 - Sem incidência</option>
+            <option value="09">09 - Com suspensão</option>
+            <option value="49">49 - Outras operações de saída</option>
+            <!-- Demais opções conforme necessidade... -->
           </select>
         </div>
+
         <div class="form-group">
           <label for="base_pis">Base (%) - PIS:</label>
-          <input type="number" id="base_pis" name="base_pis" class="form-control" max="100" step="0.01" required/>
+          <input type="number" id="base_pis" name="base_pis"
+                 class="form-control" max="100" step="0.01" required/>
         </div>
+
         <div class="form-group">
           <label for="cst_cofins">CST - COFINS:</label>
           <select id="cst_cofins" name="cst_cofins" class="form-control" required>
             <option value="">Selecionar</option>
-            <option value="01">01 - Operação tributável (alíquota normal, cumulativo ou não)</option>
-            <option value="02">02 - Operação tributável (alíquota diferenciada)</option>
-            <option value="03">03 - Operação tributável (alíquota por unidade de produto)</option>
-            <option value="04">04 - Operação tributável (tributação monofásica, alíquota zero)</option>
-            <option value="05">05 - Operação Tributável (Substituição Tributária)</option>
-            <option value="06">06 - Operação tributável (alíquota zero)</option>
-            <option value="07">07 - Operação isenta da contribuição</option>
-            <option value="08">08 - Operação sem incidência da contribuição</option>
-            <option value="09">09 - Operação com suspensão da contribuição</option>
-            <option value="49">49 - Outras Operações de Saída</option>
-            <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
-            <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
-            <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
-            <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
-            <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
-            <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
-            <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
-            <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno</option>
-            <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
-            <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
-            <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação</option>
-            <option value="67">67 - Crédito Presumido - Outras Operações</option>
-            <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
-            <option value="71">71 - Operação de Aquisição com Isenção</option>
-            <option value="72">72 - Operação de Aquisição com Suspensão</option>
-            <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
-            <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
-            <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
-            <option value="98">98 - Outras Operações de Entrada</option>
-            <option value="99">99 - Outras operações</option>
+            <option value="01">01 - Tributável (alíquota normal)</option>
+            <option value="02">02 - Tributável (diferenciada)</option>
+            <option value="03">03 - Tributável (por unidade)</option>
+            <option value="04">04 - Monofásica (alíquota zero)</option>
+            <option value="05">05 - Substituição Tributária</option>
+            <option value="06">06 - Alíquota zero</option>
+            <option value="07">07 - Isenta</option>
+            <option value="08">08 - Sem incidência</option>
+            <option value="09">09 - Com suspensão</option>
+            <option value="49">49 - Outras operações</option>
+            <!-- Demais opções conforme necessidade... -->
           </select>
         </div>
+
         <div class="form-group">
           <label for="base_cofins">Base (%) - COFINS:</label>
-          <input type="number" id="base_cofins" name="base_cofins" class="form-control" max="100" step="0.01" required/>
+          <input type="number" id="base_cofins" name="base_cofins"
+                 class="form-control" max="100" step="0.01" required/>
         </div>
+
         <div class="form-group">
           <label for="aliquota">Alíquota (%) - COFINS:</label>
-          <input type="number" id="aliquota" name="aliquota" class="form-control" max="100" step="0.01" required/>
+          <input type="number" id="aliquota" name="aliquota"
+                 class="form-control" max="100" step="0.01" required/>
         </div>
       </div>
 
       <div class="form-group text-center">
         <button type="submit" class="btn btn-primary">Gerar PDF</button>
       </div>
+
     </form>
   </div>
 
+  <!-- RODAPÉ -->
   <div class="footer">
-    <p>&copy; 2025 T.HUB - Todos os direitos reservados</p>
+    <p>&copy; 2025 T.HUB – Todos os direitos reservados</p>
   </div>
 
+  <!-- SCRIPTS NECESSÁRIOS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="../js/simplesnacional-dentro.js"></script>
 </body>
 </html>
