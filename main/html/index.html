@@ -3,45 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu Principal</title>
+  <title>Menu Principal – T.HUB</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f4f4f4;
-      color: black;
+      color: #000;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      margin: 0;
     }
 
-    .navbar-custom{
+    /* Navbar customizada */
+    .navbar-custom {
       background-color: #000 !important;
+    }
+    .navbar-custom .navbar-nav .nav-link {
+      color: #fff !important;
+      font-family: Arial, sans-serif;
     }
     .navbar-custom .navbar-nav .nav-link:hover {
       color: #007bff !important;
-      /* se quiser um efeito de transição suave: */
-      transition: color 1.0s ease-in-out;
-}
-    
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1;
-      padding: 20px;
+      transition: color 0.2s ease-in-out;
+    }
+    .navbar-custom .navbar-nav .nav-link.active {
+      color: #007bff !important;
     }
 
-    h2 {
+    /* Conteúdo principal */
+    .page-container {
+      flex: 1;
+      padding: 20px;
+      max-width: 800px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .page-container h2 {
       text-align: center;
-      margin-top: 50px;
-      font-size: 36px;
+      margin-bottom: 30px;
       font-weight: bold;
     }
 
+    /* Botões de opção */
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
     .btn-group .btn {
       width: 250px;
       margin: 10px;
@@ -50,11 +63,10 @@
       border-radius: 8px;
       transition: background-color 0.3s, transform 0.3s;
     }
-
     .btn-primary {
-      background-color: black;
+      background-color: #000;
       border: none;
-      color: white;
+      color: #fff;
     }
     .btn-primary:hover {
       background-color: #0056b3;
@@ -62,27 +74,17 @@
       transform: scale(1.05);
     }
 
-    /* Footer sempre abaixo */
+    /* Footer */
     .footer {
       background: #000;
       color: #fff;
       text-align: center;
-      padding: 30px 0;
+      padding: 20px 0;
       margin-top: auto;
     }
     .footer p {
       margin: 0;
       font-size: 14px;
-    }
-
-    /* Opcional: ajustar toggler */
-    .navbar-toggler {
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    @media (max-width: 768px) {
-      h2 { font-size: 28px; }
-      .btn-group .btn { width: 80%; }
     }
   </style>
 </head>
@@ -101,9 +103,10 @@
             aria-label="Alternar navegação">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+        <li class="nav-item"><a class="nav-link active" href="index.html">Início</a></li>
         <li class="nav-item"><a class="nav-link" href="simplesnacional-dentro.html">Simples Nacional</a></li>
         <li class="nav-item"><a class="nav-link" href="lucroreal-dentro.html">Lucro Real</a></li>
         <li class="nav-item"><a class="nav-link" href="excecoes.html">Exceções de NCM</a></li>
@@ -111,8 +114,8 @@
     </div>
   </nav>
 
-  <!-- Conteúdo principal -->
-  <div class="container">
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="page-container">
     <h2>Escolha uma opção</h2>
     <div class="btn-group">
       <a href="simplesnacional-dentro.html" class="btn btn-primary">Simples Nacional</a>
@@ -121,12 +124,12 @@
     </div>
   </div>
 
-  <!-- Rodapé -->
+  <!-- FOOTER -->
   <div class="footer">
-    <p>&copy; 2025 T.HUB - Todos os direitos reservados</p>
+    <p>&copy; 2025 T.HUB – Todos os direitos reservados</p>
   </div>
 
-  <!-- Bootstrap JS + Popper -->
+  <!-- Bootstrap JS + Popper + jQuery -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
