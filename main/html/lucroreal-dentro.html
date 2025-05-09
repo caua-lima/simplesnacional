@@ -118,25 +118,27 @@
 
   <!-- FORMULÁRIO SIMPLES NACIONAL - INTRA-ESTADO -->
   <div class="container">
-    <h2>Natureza de Operação de Vendas dentro do Estado - Simples Nacional</h2>
+    <h2>Natureza de Operação de Vendas dentro do Estado - Lucro Real</h2>
     <form id="formFiscal">
 
       <div id="natureza_padrao">
         <div class="form-group">
-          <label for="csosn">CSOSN:</label>
-          <select id="csosn" name="csosn" class="form-control" required>
-            <option value="">Selecionar</option>
-            <option value="101">101 - Tributada com permissão de crédito</option>
-            <option value="102">102 - Tributada sem permissão de crédito</option>
-            <option value="103">103 - Isenção do ICMS para faixa de receita bruta</option>
-            <option value="201">201 - Tributada com permissão de crédito e ST</option>
-            <option value="202">202 - Tributada sem permissão de crédito e ST</option>
-            <option value="203">203 - Isenção ICMS faixa e ST</option>
-            <option value="300">300 - Imune</option>
-            <option value="400">400 - Não tributada</option>
-            <option value="500">500 - ICMS cobrado anteriormente</option>
-            <option value="900">900 - Outros</option>
-          </select>
+          <label for="cst">CST:</label>
+          <select id="cst" name="cst" class="form-control" required>
+                <option value="">Selecione</option>
+                <option value="00">00 - Tributada integralmente</option>
+                <option value="10">10 - Tributada e com cobrança do ICMS por substituição tributária</option>
+                <option value="20">20 - Com redução de base de cálculo</option>
+                <option value="30">30 - Isenta ou não tributada e com cobrança do ICMS por substituição tributária</option>
+                <option value="40">40 - Isenta</option>
+                <option value="41">41 - Não tributada</option>
+                <option value="50">50 - Suspensão</option>
+                <option value="51">51 - Diferimento</option>
+                <option value="60">60 - ICMS cobrado anteriormente por substituição tributária</option>
+                <option value="70">70 - Com redução de base de cálculo e cobrança do ICMS por substituição tributária</option>
+                <option value="90">90 - Outras</option>
+            </select>
+
         </div>
 
         <div class="form-group">
@@ -277,6 +279,6 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="../js/simplesnacional-dentro.js"></script>
+  <script src="../js/lucroreal-dentro.js"></script>
 </body>
 </html>

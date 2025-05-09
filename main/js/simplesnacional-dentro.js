@@ -47,7 +47,7 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
 
   // Gerar PDF para a Natureza de Operação dentro do Estado
   const intra = [
-    'Natureza de Operação de Vendas dentro do Estado',
+    'Natureza de Operação de Vendas - Simples Nacional ( Dentro do Estado)',
     `CSOSN: ${csosn.value}`, `CFOP: ${cfop.value}`, `ICMS DIFAL: ${icms_difal.value}`,
     `CST IPI: ${cst_ipi.value}`, `Alíquota IPI: ${aliquota_ipi.value}%`,
     `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Alíquota ISSQN: ${aliquota_issqn.value}%`,
