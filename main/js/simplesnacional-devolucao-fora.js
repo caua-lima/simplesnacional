@@ -47,7 +47,7 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
 
   // Gerar PDF para a Natureza de Operação dentro do Estado
   const intra = [
-    'Natureza de Operação de Vendas - Simples Nacional ( Dentro do Estado )',
+    'Natureza de Operação de Devoluções - Simples Nacional ( Fora do Estado )',
     `CSOSN: ${csosn.value}`, `CFOP: ${cfop.value}`, `ICMS DIFAL: ${icms_difal.value}`,
     `CST IPI: ${cst_ipi.value}`, `Alíquota IPI: ${aliquota_ipi.value}%`,
     `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Alíquota ISSQN: ${aliquota_issqn.value}%`,
@@ -57,8 +57,8 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
     `Alíquota COFINS: ${aliquota.value}%`
   ];
 
-  gen(doc1, intra, 'Natureza de Operação de Vendas - Simples Nacional');
-  doc1.save('Natureza de Operação de Vendas - Simples Nacional ( Dentro do Estado ).pdf');
+  gen(doc1, intra, 'Natureza de Operação de Devoluções - Simples Nacional');
+  doc1.save('Natureza de Operação de Devoluções - Simples Nacional ( Fora do Estado ).pdf');
 
-  window.location.href = 'simplesnacional-fora.html'
+  window.location.href = 'index.html'
 });
