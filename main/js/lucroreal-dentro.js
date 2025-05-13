@@ -2,7 +2,7 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
   e.preventDefault();
   const { jsPDF } = window.jspdf;
 
-  const csosn = document.getElementById('csosn');
+  const cst = document.getElementById('cst');
   const cfop = document.getElementById('cfop');
   const icms_difal = document.getElementById('icms_difal');
   const cst_ipi = document.getElementById('cst_ipi');
@@ -48,7 +48,7 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
   // Gerar PDF para a Natureza de Operação dentro do Estado
   const intra = [
     'Natureza de Operação de Vendas - Lucro Real ( Dentro do Estado)',
-    `CSOSN: ${csosn.value}`, `CFOP: ${cfop.value}`, `ICMS DIFAL: ${icms_difal.value}`,
+    `CST DO ICMS: ${cst.value}`, `CFOP: ${cst.value}`, `ICMS DIFAL: ${icms_difal.value}`,
     `CST IPI: ${cst_ipi.value}`, `Alíquota IPI: ${aliquota_ipi.value}%`,
     `CST ISSQN: ${cst_issqn.options[cst_issqn.selectedIndex].text}`, `Alíquota ISSQN: ${aliquota_issqn.value}%`,
     `Base ISSQN: ${base_issqn.value}%`, `Descontar ISS: ${descontar_iss.value}`,
