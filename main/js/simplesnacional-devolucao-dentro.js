@@ -60,5 +60,5 @@ document.getElementById('formFiscal').addEventListener('submit', function(e) {
   gen(doc1, intra, 'Natureza de Operação de Devoluções - Simples Nacional');
   doc1.save('Natureza de Operação de Devoluções - Simples Nacional ( Dentro do Estado).pdf');
 
-  window.location.href = 'simplesnacional-fora.html'
+  window.location.href = 'simplesnacional-devolucao-fora.html'
 });
